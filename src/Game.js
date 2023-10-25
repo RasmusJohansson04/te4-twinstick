@@ -18,7 +18,7 @@ export default class Game {
     this.gameTime = 0
     this.enemies = []
     this.enemyTimer = 0
-    this.enemyInterval = 1
+    this.enemyInterval = 1000
     this.hasWave = true
     this.waveTimer = 0
     this.waveInterval = 1000
@@ -65,10 +65,12 @@ export default class Game {
     this.enemies.forEach((enemy) => {
       enemy.update(this.player)
       if (this.checkCollision(this.player, enemy)) {
-        this.player.lives--
         enemy.markedForDeletion = true
         if (enemy.type === 'candy') {
           this.player.ammo += 5
+        }
+        else {
+          this.player.lives--
         }
       }
       this.player.projectiles.forEach((projectile) => {
