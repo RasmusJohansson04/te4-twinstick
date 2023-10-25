@@ -52,7 +52,7 @@ export default class Game {
         x = this.width - this.tileSize
       }
       if (Math.random() < 0.2) {
-        this.enemies.push(new Candy(this, x, y))
+        this.enemies.push(new Pumpkin(this, x, y))
       } else {
         this.enemies.push(new Pumpkin(this, x, y))
       }
@@ -74,11 +74,14 @@ export default class Game {
         }
       }
       this.player.projectiles.forEach((projectile) => {
-        if (this.checkCollision(projectile, enemy)) {
+        if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy') {
           if (enemy.lives > 1) {
             enemy.lives -= projectile.damage
           } else {
             enemy.markedForDeletion = true
+            if (Math.random() > .8) {
+              this.enemies.push(new Candy(this, enemy.x, enemy.y))
+            }
           }
           projectile.markedForDeletion = true
         }
