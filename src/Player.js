@@ -3,8 +3,8 @@ import Projectile from './Projectile.js'
 export default class Player {
   constructor(game) {
     this.game = game
-    this.width = 32
-    this.height = 64
+    this.width = 16
+    this.height = 16
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
 
@@ -17,7 +17,7 @@ export default class Player {
     this.maxAmmo = 20
     this.ammo = 20
     this.ammoTimer = 0
-    this.ammoInterval = 500
+    this.ammoInterval = 400
 
     this.lives = 10
   }

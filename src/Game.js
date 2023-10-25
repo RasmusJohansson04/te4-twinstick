@@ -18,7 +18,11 @@ export default class Game {
     this.gameTime = 0
     this.enemies = []
     this.enemyTimer = 0
-    this.enemyInterval = 1000
+    this.enemyInterval = 1
+    this.hasWave = true
+    this.waveTimer = 0
+    this.waveInterval = 1000
+    this.tileSize = 16
 
     this.player = new Player(this)
   }
@@ -28,17 +32,24 @@ export default class Game {
       this.gameTime += deltaTime
     }
 
+    //* SPAWN ENEMIES
     if (this.enemyTimer > this.enemyInterval) {
-      let x = Math.random() < 0.5 ? 0 : this.width // spawn on left or right edge
-      let y = Math.random() < 0.5 ? 0 : this.height // spawn on top or bottom edge
-      if (x === 0) {
-        y = Math.random() * this.height // if on left edge, randomize y position
-      } else if (x === this.width) {
-        y = Math.random() * this.height // if on right edge, randomize y position
-      } else if (y === 0) {
-        x = Math.random() * this.width // if on top edge, randomize x position
-      } else {
-        x = Math.random() * this.width // if on bottom edge, randomize x position
+      let items = ['north', 'west', 'south', 'east']
+      let directions = items[Math.floor(Math.random() * items.length)]
+      let x = 0
+      let y = 0
+      if (directions === 'north') {
+        y = 0
+        x = Math.random() * this.width
+      } else if (directions === 'west') {
+        y = Math.random() * this.height
+        x = 0
+      } else if (directions === 'south') {
+        y = this.height - this.tileSize
+        x = Math.random() * this.width
+      } else if (directions === 'east') {
+        y = Math.random() * this.height
+        x = this.width - this.tileSize
       }
       if (Math.random() < 0.2) {
         this.enemies.push(new Candy(this, x, y))
