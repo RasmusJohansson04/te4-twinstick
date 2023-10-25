@@ -3,6 +3,8 @@ import Player from './Player.js'
 import UserInterface from './UserInterface.js'
 import Pumpkin from './Pumpkin.js'
 import Candy from './Candy.js'
+import Camera from './Camera.js'
+import FirstLevel from './levels/FirstLevel.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
     this.width = width
@@ -25,6 +27,9 @@ export default class Game {
     this.tileSize = 16
 
     this.player = new Player(this)
+    this.camera = new Camera(this, this.player.x, this.player.y, 0, 0)
+
+    this.level = new FirstLevel(this)
   }
 
   update(deltaTime) {
@@ -61,6 +66,7 @@ export default class Game {
       this.enemyTimer += deltaTime
     }
     this.player.update(deltaTime)
+    this.camera.update(this.player)
 
     this.enemies.forEach((enemy) => {
       enemy.update(this.player)
@@ -92,10 +98,12 @@ export default class Game {
 
   draw(context) {
     this.ui.draw(context)
-    this.player.draw(context)
+    this.camera.apply(context)
+    this.player.draw(context, this.camera.x, this.camera.y)
     this.enemies.forEach((enemy) => {
-      enemy.draw(context)
+      enemy.draw(context, this.camera.x, this.camera.y)
     })
+    this.camera.reset(context)
   }
 
   checkCollision(object1, object2) {
