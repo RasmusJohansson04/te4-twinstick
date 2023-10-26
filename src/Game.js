@@ -31,6 +31,9 @@ export default class Game {
     if (!this.gameOver) {
       this.gameTime += deltaTime
     }
+    else {
+      return
+    }
 
     //* SPAWN ENEMIES
     if (this.enemyTimer > this.enemyInterval) {
