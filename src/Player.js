@@ -95,8 +95,8 @@ export default class Player {
   shoot(mouseX, mouseY) {
     // get angle between player and mouse
     const angle = Math.atan2(
-      mouseY - (this.y + this.height / 2),
-      mouseX - (this.x + this.width / 2)
+      (mouseY) - ((this.y + this.height / 2)),
+      (mouseX) - ((this.x + this.width / 2))
     )
 
     if (this.ammo > 0) {
