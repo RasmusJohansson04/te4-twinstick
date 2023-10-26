@@ -49,6 +49,11 @@ export default class Player {
       this.speedY = 0
     }
 
+    if (this.speedX !== 0 && this.speedY !== 0) {
+      this.speedX *= Math.SQRT1_2
+      this.speedY *= Math.SQRT1_2
+    }
+
     this.y += this.speedY
     this.x += this.speedX
 
