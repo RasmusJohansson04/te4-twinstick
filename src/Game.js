@@ -81,9 +81,8 @@ export default class Game {
       }
       this.player.projectiles.forEach((projectile) => {
         if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy') {
-          if (enemy.lives > 1) {
-            enemy.lives -= projectile.damage
-          } else {
+          enemy.lives -= projectile.damage
+          if (enemy.lives <= 0) {
             enemy.markedForDeletion = true
             if (Math.random() > .8) {
               this.enemies.push(new Candy(this, enemy.x, enemy.y))
