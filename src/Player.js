@@ -12,7 +12,7 @@ export default class Player {
 
     this.speedX = 0
     this.speedY = 0
-    this.maxSpeed = 6
+    this.maxSpeed = 4
 
     this.maxAmmo = 20
     this.ammo = 20
@@ -20,6 +20,8 @@ export default class Player {
     this.ammoInterval = 400
 
     this.lives = 10
+
+    this.weaponType = 0
   }
 
   update(deltaTime) {
@@ -97,25 +99,73 @@ export default class Player {
     })
   }
 
-  shoot(mouseX, mouseY) {
+  shoot(mouseX, mouseY, weaponType) {
     // get angle between player and mouse
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
     )
 
-    if (this.ammo > 0) {
-      this.ammo--
-      this.projectiles.push(
-        new Projectile(
-          this.game,
-          this.x + this.width / 2,
-          this.y + this.height / 2,
-          angle
-        )
-      )
-    } else {
-      console.log('out of ammo')
+    switch (weaponType) {
+      case 0:
+        if (this.ammo > 0) {
+          this.ammo--
+          this.projectiles.push(
+            new Projectile(
+              this.game,
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              angle,
+              'standard'
+            )
+          )
+        }
+        break
+      case 1:
+        if (this.ammo > 0) {
+          this.ammo--
+          this.projectiles.push(
+            new Projectile(
+              this.game,
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              angle + .2,
+              'dagger'
+            )
+          )
+          this.projectiles.push(
+            new Projectile(
+              this.game,
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              angle,
+              'dagger'
+            )
+          )
+          this.projectiles.push(
+            new Projectile(
+              this.game,
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              angle - .2,
+              'dagger'
+            )
+          )
+        }
+      case 2:
+        if (this.ammo > 0) {
+          this.ammo--
+          this.projectiles.push(
+            new Projectile(
+              this.game,
+              this.x + this.width / 2,
+              this.y + this.height / 2,
+              angle,
+              'spear'
+            )
+          )
+        }
+        break
     }
   }
 }

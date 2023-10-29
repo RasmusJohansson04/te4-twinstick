@@ -2,6 +2,7 @@ import InputHandler from './InputHandler.js'
 import Player from './Player.js'
 import UserInterface from './UserInterface.js'
 import Pumpkin from './Pumpkin.js'
+import Skeleton from './Skeleton.js'
 import Candy from './Candy.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
@@ -18,7 +19,7 @@ export default class Game {
     this.gameTime = 0
     this.enemies = []
     this.enemyTimer = 0
-    this.enemyInterval = 1000
+    this.enemyInterval = 500
     this.hasWave = true
     this.waveTimer = 0
     this.waveInterval = 1000
@@ -55,7 +56,7 @@ export default class Game {
         x = this.width - this.tileSize
       }
       if (Math.random() < 0.2) {
-        this.enemies.push(new Pumpkin(this, x, y))
+        this.enemies.push(new Skeleton(this, x, y))
       } else {
         this.enemies.push(new Pumpkin(this, x, y))
       }
@@ -66,7 +67,7 @@ export default class Game {
     this.player.update(deltaTime)
 
     this.enemies.forEach((enemy) => {
-      enemy.update(this.player)
+      enemy.update(this.player, deltaTime)
       if (this.checkCollision(this.player, enemy)) {
         enemy.markedForDeletion = true
         if (enemy.type === 'candy') {
@@ -85,9 +86,19 @@ export default class Game {
               this.enemies.push(new Candy(this, enemy.x, enemy.y))
             }
           }
-          projectile.markedForDeletion = true
+          if (projectile.type !== 'spear') {
+            projectile.markedForDeletion = true
+          }
         }
       })
+      if (enemy.projectiles) {
+        enemy.projectiles.forEach((projectile) => {
+          if (this.checkCollision(projectile, this.player)) {
+            projectile.markedForDeletion = true
+            this.player.lives--
+          }
+        })
+      }
     })
     this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion)
   }

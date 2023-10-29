@@ -20,7 +20,7 @@ export default class InputHandler {
       }
 
       if (event.key === ' ') {
-        this.game.player.shoot(this.mouseX, this.mouseY)
+        this.game.player.shoot(this.mouseX, this.mouseY, 1)
       }
 
       if (event.key === 'p') {
@@ -40,7 +40,7 @@ export default class InputHandler {
     })
 
     window.addEventListener('mousedown', (event) => {
-      this.game.player.shoot(this.mouseX, this.mouseY)
+      this.game.player.shoot(this.mouseX, this.mouseY, 2)
     })
   }
 }
