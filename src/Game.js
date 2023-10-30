@@ -3,6 +3,7 @@ import Player from './Player.js'
 import UserInterface from './UserInterface.js'
 import Pumpkin from './Pumpkin.js'
 import Skeleton from './Skeleton.js'
+import Colossus from './Colossus.js'
 import Candy from './Candy.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
@@ -19,7 +20,7 @@ export default class Game {
     this.gameTime = 0
     this.enemies = []
     this.enemyTimer = 0
-    this.enemyInterval = 5000
+    this.enemyInterval = 500
     this.hasWave = true
     this.waveTimer = 0
     this.waveInterval = 1000
@@ -55,7 +56,10 @@ export default class Game {
         y = Math.random() * this.height
         x = this.width - this.tileSize
       }
-      if (Math.random() < 0.2) {
+      if (Math.random() < .1) {
+        this.enemies.push(new Colossus(this, x, y))
+      }
+      else if (Math.random() < 0.2) {
         this.enemies.push(new Skeleton(this, x, y))
       } else {
         this.enemies.push(new Pumpkin(this, x, y))
