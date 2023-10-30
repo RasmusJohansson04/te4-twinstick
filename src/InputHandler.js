@@ -3,6 +3,7 @@ export default class InputHandler {
     this.game = game
     this.mouseX = 0
     this.mouseY = 0
+    this.weaponType = 0
 
     window.addEventListener('keydown', (event) => {
       if (
@@ -19,8 +20,16 @@ export default class InputHandler {
         this.game.keys.push(event.key)
       }
 
-      if (event.key === ' ') {
-        this.game.player.shoot(this.mouseX, this.mouseY, 1)
+      if (event.key === '1') {
+        this.weaponType = 0
+      }
+
+      if (event.key === '2') {
+        this.weaponType = 1
+      }
+
+      if (event.key === '3') {
+        this.weaponType = 2
       }
 
       if (event.key === 'p') {
@@ -40,7 +49,7 @@ export default class InputHandler {
     })
 
     window.addEventListener('mousedown', (event) => {
-      this.game.player.shoot(this.mouseX, this.mouseY, 2)
+      this.game.player.shoot(this.mouseX, this.mouseY, this.weaponType)
     })
   }
 }

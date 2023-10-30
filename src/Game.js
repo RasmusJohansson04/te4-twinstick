@@ -19,7 +19,7 @@ export default class Game {
     this.gameTime = 0
     this.enemies = []
     this.enemyTimer = 0
-    this.enemyInterval = 500
+    this.enemyInterval = 5000
     this.hasWave = true
     this.waveTimer = 0
     this.waveInterval = 1000

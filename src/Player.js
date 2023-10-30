@@ -152,6 +152,7 @@ export default class Player {
             )
           )
         }
+        break
       case 2:
         if (this.ammo > 0) {
           this.ammo--
