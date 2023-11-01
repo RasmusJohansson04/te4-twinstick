@@ -4,6 +4,7 @@ import UserInterface from './UserInterface.js'
 import Pumpkin from './Pumpkin.js'
 import Skeleton from './Skeleton.js'
 import Colossus from './Colossus.js'
+import Reaper from './Reaper.js'
 import Candy from './Candy.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
@@ -56,7 +57,10 @@ export default class Game {
         y = Math.random() * this.height
         x = this.width - this.tileSize
       }
-      if (Math.random() < .1) {
+      if (Math.random() < .05) {
+        this.enemies.push(new Reaper(this, x, y))
+      }
+      else if (Math.random() < .1) {
         this.enemies.push(new Colossus(this, x, y))
       }
       else if (Math.random() < 0.2) {

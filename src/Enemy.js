@@ -20,7 +20,7 @@ export default class Enemy {
 
   draw(context) {
     if (this.image) {
-      context.drawImage(this.image, this.x, this.y)
+      context.drawImage(this.image, this.x - this.xOffset, this.y)
     }
     else {
       context.fillStyle = this.color

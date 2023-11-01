@@ -4,7 +4,8 @@ import spriteImage from './assets/sprites/ghost.png'
 export default class Pumpkin extends Enemy {
   constructor(game, x, y) {
     super(game)
-    this.width = 32
+    this.xOffset = 8
+    this.width = 16
     this.height = 32
     this.x = x
     this.y = y

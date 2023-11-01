@@ -4,7 +4,8 @@ import spriteImage from './assets/sprites/player.png'
 export default class Player {
   constructor(game) {
     this.game = game
-    this.width = 32
+    this.xOffset = 8
+    this.width = 16
     this.height = 32
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
@@ -83,7 +84,7 @@ export default class Player {
   draw(context) {
     // context.fillStyle = '#f00'
     // context.fillRect(this.x, this.y, this.width, this.height)
-    context.drawImage(this.image, this.x, this.y)
+    context.drawImage(this.image, this.x - this.xOffset, this.y)
     if (this.game.debug) {
       context.strokeStyle = '#000'
       context.strokeRect(this.x, this.y, this.width, this.height)
