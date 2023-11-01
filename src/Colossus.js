@@ -8,7 +8,7 @@ export default class Colossus extends Enemy {
         this.x = x
         this.y = y
         this.speed = 1
-        this.lives = 50
+        this.lives = 20
         this.color = 'yellow'
     }
 

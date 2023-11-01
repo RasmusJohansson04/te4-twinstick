@@ -1,10 +1,11 @@
 import Projectile from './Projectile.js'
+import spriteImage from './assets/sprites/player.png'
 
 export default class Player {
   constructor(game) {
     this.game = game
-    this.width = 16
-    this.height = 16
+    this.width = 32
+    this.height = 32
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
 
@@ -13,6 +14,10 @@ export default class Player {
     this.speedX = 0
     this.speedY = 0
     this.maxSpeed = 4
+
+    const image = new Image()
+    image.src = spriteImage
+    this.image = image
 
     this.maxAmmo = 20
     this.ammo = 20
@@ -76,8 +81,9 @@ export default class Player {
   }
 
   draw(context) {
-    context.fillStyle = '#f00'
-    context.fillRect(this.x, this.y, this.width, this.height)
+    // context.fillStyle = '#f00'
+    // context.fillRect(this.x, this.y, this.width, this.height)
+    context.drawImage(this.image, this.x, this.y)
     if (this.game.debug) {
       context.strokeStyle = '#000'
       context.strokeRect(this.x, this.y, this.width, this.height)

@@ -6,4 +6,5 @@
 - [✗] Sprites
 - [✗] Spells
 - [✗] Spear fix
--
+- [✗] Power-ups
+- [✗] Hurt animation

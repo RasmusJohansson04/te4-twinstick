@@ -1,15 +1,20 @@
 import Enemy from './Enemy.js'
+import spriteImage from './assets/sprites/ghost.png'
 
 export default class Pumpkin extends Enemy {
   constructor(game, x, y) {
     super(game)
-    this.width = 16
-    this.height = 16
+    this.width = 32
+    this.height = 32
     this.x = x
     this.y = y
     this.speed = 2
     this.lives = Math.floor(Math.random() * 3) + 1
     this.color = 'orange'
+
+    const image = new Image()
+    image.src = spriteImage
+    this.image = image
   }
 
   update(player) {

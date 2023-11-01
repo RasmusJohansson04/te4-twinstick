@@ -1,12 +1,18 @@
+import spriteImage from './assets/sprites/arrow.png'
+
 export default class Projectile {
   constructor(game, x, y, angle, type) {
     this.game = game
-    this.width = 10
+    this.width = 16
     this.height = 4
     this.x = x
     this.y = y
     this.angle = angle
     this.type = type
+
+    const image = new Image()
+    image.src = spriteImage
+    this.image = image
 
     this.speed = 400
     this.damage = 1
@@ -31,8 +37,10 @@ export default class Projectile {
     context.save()
     context.translate(this.x, this.y)
     context.rotate(this.angle)
-    context.fillStyle = '#ff0'
-    context.fillRect(0, 0, this.width, this.height)
+    // context.fillStyle = '#ff0'
+    // context.fillRect(0, 0, this.width, this.height)
+
+    context.drawImage(this.image, 0, 0)
     context.restore()
   }
 }
