@@ -6,6 +6,7 @@ import Skeleton from './Skeleton.js'
 import Colossus from './Colossus.js'
 import Reaper from './Reaper.js'
 import Candy from './Candy.js'
+import Background from './Background.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
     this.width = width
@@ -27,6 +28,7 @@ export default class Game {
     this.waveInterval = 1000
     this.tileSize = 16
 
+    this.background = new Background(this)
     this.player = new Player(this)
   }
 
@@ -112,6 +114,7 @@ export default class Game {
   }
 
   draw(context) {
+    this.background.draw(context)
     this.player.draw(context)
     this.enemies.forEach((enemy) => {
       enemy.draw(context)
