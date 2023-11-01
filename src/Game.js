@@ -92,6 +92,7 @@ export default class Game {
           enemy.lives -= projectile.damage
           if (enemy.lives <= 0) {
             enemy.markedForDeletion = true
+            this.player.xp += 10
             if (Math.random() > .8) {
               this.enemies.push(new Candy(this, enemy.x, enemy.y))
             }

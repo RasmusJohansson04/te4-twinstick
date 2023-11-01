@@ -25,12 +25,21 @@ export default class Player {
     this.ammoTimer = 0
     this.ammoInterval = 400
 
+    this.xp = 0
+    this.neededXp = 100
+    this.level = 1
+
     this.lives = 10
 
     this.weaponType = 0
   }
 
   update(deltaTime) {
+    if (this.xp >= this.neededXp) {
+      this.xp = this.xp - this.neededXp
+      this.level++
+    }
+
     if (this.lives <= 0) {
       this.game.gameOver = true
     }
@@ -85,6 +94,9 @@ export default class Player {
     // context.fillStyle = '#f00'
     // context.fillRect(this.x, this.y, this.width, this.height)
     context.drawImage(this.image, this.x - this.xOffset, this.y)
+    context.fillStyle = 'red'
+    context.fillRect(this.x - this.lives * 2 + this.width / 2, this.y - 8, this.lives * 4, 4)
+
     if (this.game.debug) {
       context.strokeStyle = '#000'
       context.strokeRect(this.x, this.y, this.width, this.height)

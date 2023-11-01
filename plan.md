@@ -8,3 +8,5 @@
 - [✗] Spear fix
 - [✗] Power-ups
 - [✗] Hurt animation
+- [✗] Level ups
+- [✗] Weapons unlocked by level up
