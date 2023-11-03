@@ -16,7 +16,10 @@ export default class Game {
     this.ui = new UserInterface(this)
     this.keys = []
     this.enemies = []
+
     this.gameOver = false
+    this.paused = false
+
     this.gravity = 1
     this.debug = false
     this.gameTime = 0
@@ -37,6 +40,7 @@ export default class Game {
       this.gameTime += deltaTime
     }
     else {
+      this.paused = true
       return
     }
 

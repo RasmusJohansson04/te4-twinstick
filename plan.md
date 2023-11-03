@@ -10,3 +10,5 @@
 - [✗] Hurt animation
 - [✗] Level ups
 - [✗] Weapons unlocked by level up
+- [✗] Dark Souls-like boss entrance
+- [✗] Timer based waves??

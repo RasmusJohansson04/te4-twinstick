@@ -19,6 +19,10 @@ export default class Enemy {
   }
 
   draw(context) {
+    if (this.type === 'enemy') {
+      context.fillStyle = 'red'
+      context.fillRect(this.x - this.lives * 2 + this.width / 2, this.y - 8, this.lives * 4, 4)
+    }
     if (this.image) {
       context.drawImage(this.image, this.x - this.xOffset, this.y)
     }
