@@ -89,18 +89,22 @@ export default class Game {
 
     this.enemies.forEach((enemy) => {
       enemy.update(this.player, deltaTime)
+      enemy.hurt(deltaTime)
       if (this.checkCollision(this.player, enemy)) {
-        enemy.markedForDeletion = true
         if (enemy.type === 'candy') {
+          enemy.markedForDeletion = true
           this.player.lives++
         }
         else {
-          this.player.lives--
-          this.player.isHit = true
+          if (!this.player.isHurt) {
+            this.player.lives--
+            this.player.isHurt = true
+          }
         }
       }
       this.player.projectiles.forEach((projectile) => {
         if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy' && projectile.hasHit.indexOf(enemy) === -1) {
+          enemy.isHurt = true
           enemy.lives -= projectile.damage
           if (enemy.lives <= 0) {
             enemy.markedForDeletion = true
@@ -121,8 +125,10 @@ export default class Game {
         enemy.projectiles.forEach((projectile) => {
           if (this.checkCollision(projectile, this.player)) {
             projectile.markedForDeletion = true
-            this.player.lives--
-            this.player.isHit = true
+            if (!this.player.isHurt) {
+              this.player.lives--
+              this.player.isHurt = true
+            }
           }
         })
       }

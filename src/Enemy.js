@@ -8,6 +8,28 @@ export default class Enemy {
     this.markedForDeletion = false
     this.color = color
     this.type = 'enemy'
+
+    this.isHurt = false
+    this.hurtTimer = 0
+    this.hurtInterval = 200
+  }
+
+  hurt(deltaTime) {
+    if (this.isHurt) {
+      if (this.hurtTimer < this.hurtInterval) {
+        this.hurtTimer += deltaTime
+        if (this.image) {
+          this.image.src = this.hurtSprite
+        }
+      }
+      else {
+        if (this.image) {
+          this.image.src = this.normalSprite
+        }
+        this.isHurt = false
+        this.hurtTimer = 0
+      }
+    }
   }
 
   update() {

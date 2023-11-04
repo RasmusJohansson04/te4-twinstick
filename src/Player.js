@@ -1,6 +1,6 @@
 import Projectile from './Projectile.js'
 import spriteImage from './assets/sprites/player.png'
-import spriteImage2 from './assets/sprites/player_hit.png'
+import spriteImage2 from './assets/sprites/player_hurt.png'
 import Arrow from './Arrow.js'
 import Dagger from './Dagger.js'
 import Spear from './Spear.js'
@@ -41,21 +41,21 @@ export default class Player {
 
     this.weaponType = 0
 
-    this.isHit = false
-    this.hitTimer = 0
-    this.hitInterval = 250
+    this.isHurt = false
+    this.hurtTimer = 0
+    this.hurtInterval = 300
   }
 
   update(deltaTime) {
-    if (this.isHit) {
-      if (this.hitTimer < this.hitInterval) {
-        this.hitTimer += deltaTime
+    if (this.isHurt) {
+      if (this.hurtTimer < this.hurtInterval) {
+        this.hurtTimer += deltaTime
         this.image.src = spriteImage2
       }
       else {
         this.image.src = spriteImage
-        this.isHit = false
-        this.hitTimer = 0
+        this.isHurt = false
+        this.hurtTimer = 0
       }
     }
 

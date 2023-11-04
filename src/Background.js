@@ -13,7 +13,7 @@ export default class Background {
     setupBackground() {
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
-                let value = this.noise.simplex2(x / 100, y / 100);
+                let value = this.noise.simplex2(x / 100, y / 100)
                 if (value < -.3) {
                     this.map.push({
                         color: '#468232',
@@ -21,23 +21,16 @@ export default class Background {
                         y: y
                     })
                 }
-                else if (value < .3) {
+                else if (value < .5) {
                     this.map.push({
                         color: '#75A743',
                         x: x,
                         y: y
                     })
                 }
-                else if (value < .7) {
-                    this.map.push({
-                        color: '#A8CA58',
-                        x: x,
-                        y: y
-                    })
-                }
                 else {
                     this.map.push({
-                        color: '#D0DA91',
+                        color: '#A8CA58',
                         x: x,
                         y: y
                     })
