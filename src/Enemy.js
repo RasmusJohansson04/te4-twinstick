@@ -8,7 +8,6 @@ export default class Enemy {
     this.markedForDeletion = false
     this.color = color
     this.type = 'enemy'
-    this.isHit = false
   }
 
   update() {

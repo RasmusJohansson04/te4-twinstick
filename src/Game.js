@@ -92,14 +92,14 @@ export default class Game {
       if (this.checkCollision(this.player, enemy)) {
         enemy.markedForDeletion = true
         if (enemy.type === 'candy') {
-          this.player.ammo += 5
+          this.player.lives++
         }
         else {
           this.player.lives--
         }
       }
       this.player.projectiles.forEach((projectile) => {
-        if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy') {
+        if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy' && projectile.hasHit.indexOf(enemy) === -1) {
           enemy.lives -= projectile.damage
           if (enemy.lives <= 0) {
             enemy.markedForDeletion = true
@@ -110,6 +110,9 @@ export default class Game {
           }
           if (!projectile.penetrate) {
             projectile.markedForDeletion = true
+          }
+          else {
+            projectile.hasHit.push(enemy)
           }
         }
       })

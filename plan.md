@@ -21,7 +21,7 @@
 - Daggers           [✓]
 - Spear             [✓]
 - Missile?          [✗]
-- Exsanguination    [✗]
+- Exsanguination    [✓]
 - Lance             [✗]
 - Rain???           [✗]
 - Earthquake        [✗]

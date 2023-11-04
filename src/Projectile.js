@@ -6,6 +6,7 @@ export default class Projectile {
     this.y = y
     this.angle = angle
     this.markedForDeletion = false
+    this.hasHit = []
   }
 
   update(deltaTime) {
