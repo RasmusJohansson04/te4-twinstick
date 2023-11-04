@@ -1,5 +1,5 @@
 import Enemy from './Enemy.js'
-import Projectile from './Projectile.js'
+import Arrow from './Arrow.js'
 
 export default class Skeleton extends Enemy {
   constructor(game, x, y) {
@@ -52,22 +52,13 @@ export default class Skeleton extends Enemy {
       playerX - (this.x + this.width / 2)
     )
     this.projectiles.push(
-      new Projectile(
+      new Arrow(
         this.game,
         this.x + this.width / 2,
         this.y + this.height / 2,
-        angle,
-        'standard'
+        angle
       )
     )
     console.log(this.projectiles)
-  }
-
-  draw(context) {
-    context.fillStyle = this.color
-    context.fillRect(this.x, this.y, this.width, this.height)
-    this.projectiles.forEach((projectile) => {
-      projectile.draw(context)
-    })
   }
 }

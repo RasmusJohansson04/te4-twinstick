@@ -1,32 +1,14 @@
-import spriteImage from './assets/sprites/arrow.png'
 
 export default class Projectile {
-  constructor(game, x, y, angle, type) {
+  constructor(game, x, y, angle) {
     this.game = game
-    this.width = 16
-    this.height = 4
     this.x = x
     this.y = y
     this.angle = angle
-    this.type = type
-
-    const image = new Image()
-    image.src = spriteImage
-    this.image = image
-
-    this.speed = 400
-    this.damage = 1
     this.markedForDeletion = false
   }
 
   update(deltaTime) {
-    const velocity = {
-      x: this.speed * Math.cos(this.angle),
-      y: this.speed * Math.sin(this.angle),
-    }
-
-    this.x += velocity.x * (deltaTime / 1000)
-    this.y += velocity.y * (deltaTime / 1000)
 
     if (this.x > this.game.width) {
       this.markedForDeletion = true
@@ -35,12 +17,27 @@ export default class Projectile {
 
   draw(context) {
     context.save()
-    context.translate(this.x, this.y)
+    if (this.static) {
+      context.translate(this.x + this.width / 2 - this.position.x, this.y + this.height / 2 - this.position.y)
+    }
+    else {
+      context.translate(this.x + this.width / 2, this.y + this.height / 2)
+    }
     context.rotate(this.angle)
-    // context.fillStyle = '#ff0'
-    // context.fillRect(0, 0, this.width, this.height)
 
-    context.drawImage(this.image, 0, 0)
+    if (this.image) {
+      if (this.static) {
+        context.drawImage(this.image, this.width / 2, -this.height / 2)
+      }
+      else {
+        context.drawImage(this.image, -this.width / 2, -this.height / 2)
+      }
+    }
+    else {
+      context.fillStyle = this.color
+      context.fillRect(0, 0, this.width, this.height)
+    }
+
     context.restore()
   }
 }

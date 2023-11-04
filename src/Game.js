@@ -3,10 +3,11 @@ import Player from './Player.js'
 import UserInterface from './UserInterface.js'
 import Pumpkin from './Pumpkin.js'
 import Skeleton from './Skeleton.js'
-import Colossus from './Colossus.js'
+import Gargoyle from './Gargoyle.js'
 import Reaper from './Reaper.js'
 import Candy from './Candy.js'
 import Background from './Background.js'
+import LevelScreen from './LevelScreen.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
     this.width = width
@@ -33,14 +34,20 @@ export default class Game {
 
     this.background = new Background(this)
     this.player = new Player(this)
+    this.lvlScreen = new LevelScreen(this)
+  }
+
+  levelUp() {
+    this.paused = true
+    this.keys = []
+    this.lvlScreen.showScreen()
   }
 
   update(deltaTime) {
-    if (!this.gameOver) {
+    if (!this.gameOver && !this.paused) {
       this.gameTime += deltaTime
     }
     else {
-      this.paused = true
       return
     }
 
@@ -67,7 +74,7 @@ export default class Game {
         this.enemies.push(new Reaper(this, x, y))
       }
       else if (Math.random() < .1) {
-        this.enemies.push(new Colossus(this, x, y))
+        this.enemies.push(new Gargoyle(this, x, y))
       }
       else if (Math.random() < 0.2) {
         this.enemies.push(new Skeleton(this, x, y))
@@ -101,7 +108,7 @@ export default class Game {
               this.enemies.push(new Candy(this, enemy.x, enemy.y))
             }
           }
-          if (projectile.type !== 'spear') {
+          if (!projectile.penetrate) {
             projectile.markedForDeletion = true
           }
         }
@@ -124,6 +131,7 @@ export default class Game {
     this.enemies.forEach((enemy) => {
       enemy.draw(context)
     })
+    // this.lvlScreen.draw(context)
     this.ui.draw(context)
   }
 

@@ -1,5 +1,10 @@
 import Projectile from './Projectile.js'
 import spriteImage from './assets/sprites/player.png'
+import Arrow from './Arrow.js'
+import Dagger from './Dagger.js'
+import Spear from './Spear.js'
+import Sword from './Sword.js'
+
 
 export default class Player {
   constructor(game) {
@@ -30,6 +35,7 @@ export default class Player {
     this.level = 1
 
     this.lives = 10
+    this.maxLives = 10
 
     this.weaponType = 0
   }
@@ -38,6 +44,7 @@ export default class Player {
     if (this.xp >= this.neededXp) {
       this.xp = this.xp - this.neededXp
       this.level++
+      this.game.levelUp()
     }
 
     if (this.lives <= 0) {
@@ -118,74 +125,79 @@ export default class Player {
     })
   }
 
-  shoot(mouseX, mouseY, weaponType) {
-    // get angle between player and mouse
+  arrow(mouseX, mouseY) {
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
     )
+    this.projectiles.push(
+      new Arrow(
+        this.game,
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        angle
+      )
+    )
+  }
 
-    switch (weaponType) {
-      case 0:
-        if (this.ammo > 0) {
-          this.ammo--
-          this.projectiles.push(
-            new Projectile(
-              this.game,
-              this.x + this.width / 2,
-              this.y + this.height / 2,
-              angle,
-              'standard'
-            )
-          )
-        }
-        break
-      case 1:
-        if (this.ammo > 0) {
-          this.ammo--
-          this.projectiles.push(
-            new Projectile(
-              this.game,
-              this.x + this.width / 2,
-              this.y + this.height / 2,
-              angle + .2,
-              'dagger'
-            )
-          )
-          this.projectiles.push(
-            new Projectile(
-              this.game,
-              this.x + this.width / 2,
-              this.y + this.height / 2,
-              angle,
-              'dagger'
-            )
-          )
-          this.projectiles.push(
-            new Projectile(
-              this.game,
-              this.x + this.width / 2,
-              this.y + this.height / 2,
-              angle - .2,
-              'dagger'
-            )
-          )
-        }
-        break
-      case 2:
-        if (this.ammo > 0) {
-          this.ammo--
-          this.projectiles.push(
-            new Projectile(
-              this.game,
-              this.x + this.width / 2,
-              this.y + this.height / 2,
-              angle,
-              'spear'
-            )
-          )
-        }
-        break
-    }
+  dagger(mouseX, mouseY) {
+    const angle = Math.atan2(
+      mouseY - (this.y + this.height / 2),
+      mouseX - (this.x + this.width / 2)
+    )
+    this.projectiles.push(
+      new Dagger(
+        this.game,
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        angle + .2
+      )
+    )
+    this.projectiles.push(
+      new Dagger(
+        this.game,
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        angle
+      )
+    )
+    this.projectiles.push(
+      new Dagger(
+        this.game,
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        angle - .2
+      )
+    )
+  }
+
+  spear(mouseX, mouseY) {
+    const angle = Math.atan2(
+      mouseY - (this.y + this.height / 2),
+      mouseX - (this.x + this.width / 2)
+    )
+    this.projectiles.push(
+      new Spear(
+        this.game,
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        angle
+      )
+    )
+  }
+
+  sword(mouseX, mouseY) {
+    const angle = Math.atan2(
+      mouseY - (this.y + this.height / 2),
+      mouseX - (this.x + this.width / 2)
+    )
+    this.projectiles.push(
+      new Sword(
+        this.game,
+        this.x + this.width / 2,
+        this.y + this.height / 2,
+        angle
+      )
+    )
   }
 }

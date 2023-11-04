@@ -23,15 +23,19 @@ export default class InputHandler {
         }
 
         if (event.key === '1') {
-          this.weaponType = 0
+          this.weaponType = 'arrow'
         }
 
         if (event.key === '2') {
-          this.weaponType = 1
+          this.weaponType = 'dagger'
         }
 
         if (event.key === '3') {
-          this.weaponType = 2
+          this.weaponType = 'spear'
+        }
+
+        if (event.key === '4') {
+          this.weaponType = 'sword'
         }
 
         if (event.key === 'p') {
@@ -58,7 +62,20 @@ export default class InputHandler {
 
     window.addEventListener('mousedown', (event) => {
       if (!this.game.paused) {
-        this.game.player.shoot(this.mouseX, this.mouseY, this.weaponType)
+        switch (this.weaponType) {
+          case 'arrow':
+            this.game.player.arrow(this.mouseX, this.mouseY)
+            break;
+          case 'dagger':
+            this.game.player.dagger(this.mouseX, this.mouseY)
+            break;
+          case 'spear':
+            this.game.player.spear(this.mouseX, this.mouseY)
+            break;
+          case 'sword':
+            this.game.player.sword(this.mouseX, this.mouseY)
+            break;
+        }
       }
     })
   }

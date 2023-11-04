@@ -1,6 +1,6 @@
 import Enemy from './Enemy.js'
 
-export default class Colossus extends Enemy {
+export default class Gargoyle extends Enemy {
     constructor(game, x, y) {
         super(game)
         this.width = 48

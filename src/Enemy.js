@@ -19,9 +19,21 @@ export default class Enemy {
   }
 
   draw(context) {
+    if (this.projectiles) {
+      this.projectiles.forEach((projectile) => {
+        projectile.draw(context)
+      })
+    }
     if (this.type === 'enemy') {
       context.fillStyle = 'red'
       context.fillRect(this.x - this.lives * 2 + this.width / 2, this.y - 8, this.lives * 4, 4)
+    }
+    else if (this.type === 'boss') {
+      context.fillStyle = 'red'
+      context.textAlign = 'left'
+      context.font = `25px Arial`
+      context.fillText(`BOSS`, 40, this.game.height - 50)
+      context.fillRect(40, this.game.height - 40, (this.lives / this.maxLives) * (this.game.width - 40 * 2), 8)
     }
     if (this.image) {
       context.drawImage(this.image, this.x - this.xOffset, this.y)
