@@ -16,7 +16,7 @@
 
 
 # Weapons
-- Melee??           [✗]
+- Melee             [✓]
 - Bow               [✓]
 - Daggers           [✓]
 - Spear             [✓]

@@ -38,6 +38,10 @@ export default class InputHandler {
           this.weaponType = 'sword'
         }
 
+        if (event.key === '5') {
+          this.weaponType = 'exsanguinate'
+        }
+
         if (event.key === 'p') {
           this.game.debug = !this.game.debug
         }
@@ -74,6 +78,9 @@ export default class InputHandler {
             break;
           case 'sword':
             this.game.player.sword(this.mouseX, this.mouseY)
+            break;
+          case 'exsanguinate':
+            this.game.player.exsanguinate(this.mouseX, this.mouseY)
             break;
         }
       }

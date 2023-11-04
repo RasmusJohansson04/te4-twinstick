@@ -4,6 +4,7 @@ import Arrow from './Arrow.js'
 import Dagger from './Dagger.js'
 import Spear from './Spear.js'
 import Sword from './Sword.js'
+import Exsanguinate from './Exsanguinate.js'
 
 
 export default class Player {
@@ -133,7 +134,7 @@ export default class Player {
     this.projectiles.push(
       new Arrow(
         this.game,
-        this.x + this.width / 2,
+        this.x,
         this.y + this.height / 2,
         angle
       )
@@ -148,7 +149,7 @@ export default class Player {
     this.projectiles.push(
       new Dagger(
         this.game,
-        this.x + this.width / 2,
+        this.x,
         this.y + this.height / 2,
         angle + .2
       )
@@ -156,7 +157,7 @@ export default class Player {
     this.projectiles.push(
       new Dagger(
         this.game,
-        this.x + this.width / 2,
+        this.x,
         this.y + this.height / 2,
         angle
       )
@@ -164,7 +165,7 @@ export default class Player {
     this.projectiles.push(
       new Dagger(
         this.game,
-        this.x + this.width / 2,
+        this.x,
         this.y + this.height / 2,
         angle - .2
       )
@@ -180,7 +181,7 @@ export default class Player {
       new Spear(
         this.game,
         this.x + this.width / 2,
-        this.y + this.height / 2,
+        this.y,
         angle
       )
     )
@@ -197,6 +198,47 @@ export default class Player {
         this.x + this.width / 2,
         this.y + this.height / 2,
         angle
+      )
+    )
+  }
+
+  exsanguinate(mouseX, mouseY) {
+    const angle = Math.atan2(
+      mouseY - (this.y + this.height / 2),
+      mouseX - (this.x + this.width / 2)
+    )
+    this.lives--
+
+    this.projectiles.push(
+      new Exsanguinate(
+        this.game,
+        this.x,
+        this.y + this.height / 2,
+        angle + Math.PI / 2
+      )
+    )
+    this.projectiles.push(
+      new Exsanguinate(
+        this.game,
+        this.x,
+        this.y + this.height / 2,
+        angle
+      )
+    )
+    this.projectiles.push(
+      new Exsanguinate(
+        this.game,
+        this.x,
+        this.y + this.height / 2,
+        angle + Math.PI
+      )
+    )
+    this.projectiles.push(
+      new Exsanguinate(
+        this.game,
+        this.x,
+        this.y + this.height / 2,
+        angle + (Math.PI * 3) / 2
       )
     )
   }
