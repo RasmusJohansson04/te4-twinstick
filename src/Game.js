@@ -96,6 +96,7 @@ export default class Game {
         }
         else {
           this.player.lives--
+          this.player.isHit = true
         }
       }
       this.player.projectiles.forEach((projectile) => {
@@ -121,6 +122,7 @@ export default class Game {
           if (this.checkCollision(projectile, this.player)) {
             projectile.markedForDeletion = true
             this.player.lives--
+            this.player.isHit = true
           }
         })
       }

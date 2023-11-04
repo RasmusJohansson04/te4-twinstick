@@ -1,5 +1,6 @@
 import Projectile from './Projectile.js'
 import spriteImage from './assets/sprites/player.png'
+import spriteImage2 from './assets/sprites/player_hit.png'
 import Arrow from './Arrow.js'
 import Dagger from './Dagger.js'
 import Spear from './Spear.js'
@@ -39,9 +40,25 @@ export default class Player {
     this.maxLives = 10
 
     this.weaponType = 0
+
+    this.isHit = false
+    this.hitTimer = 0
+    this.hitInterval = 250
   }
 
   update(deltaTime) {
+    if (this.isHit) {
+      if (this.hitTimer < this.hitInterval) {
+        this.hitTimer += deltaTime
+        this.image.src = spriteImage2
+      }
+      else {
+        this.image.src = spriteImage
+        this.isHit = false
+        this.hitTimer = 0
+      }
+    }
+
     if (this.xp >= this.neededXp) {
       this.xp = this.xp - this.neededXp
       this.level++
