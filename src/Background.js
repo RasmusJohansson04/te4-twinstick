@@ -3,8 +3,8 @@ import { Noise } from "noisejs"
 export default class Background {
     constructor(game) {
         this.game = game
-        this.width = Math.ceil(game.width / game.tileSize)
-        this.height = Math.ceil(game.height / game.tileSize)
+        this.width = Math.ceil(game.width / 8)
+        this.height = Math.ceil(game.height / 8)
         this.map = []
         this.noise = new Noise(Math.random())
         this.setupBackground()
@@ -23,14 +23,14 @@ export default class Background {
                 }
                 else if (value < .5) {
                     this.map.push({
-                        color: '#75A743',
+                        color: '#25562E',
                         x: x,
                         y: y
                     })
                 }
                 else {
                     this.map.push({
-                        color: '#A8CA58',
+                        color: '#19332D',
                         x: x,
                         y: y
                     })
@@ -43,7 +43,7 @@ export default class Background {
         for (let index = 0; index < this.map.length; index++) {
             let tile = this.map[index]
             context.fillStyle = tile.color
-            context.fillRect(tile.x * 16, tile.y * 16, 16, 16)
+            context.fillRect(tile.x * 8, tile.y * 8, 8, 8)
         }
     }
 }

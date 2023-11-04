@@ -16,6 +16,9 @@ export default class Enemy {
 
   hurt(deltaTime) {
     if (this.isHurt) {
+      if (this.lives <= 0) {
+        this.speed = 0
+      }
       if (this.hurtTimer < this.hurtInterval) {
         this.hurtTimer += deltaTime
         if (this.image) {
@@ -46,11 +49,11 @@ export default class Enemy {
       })
     }
     if (this.type === 'enemy') {
-      context.fillStyle = 'red'
+      context.fillStyle = '#A53030'
       context.fillRect(this.x - this.lives * 2 + this.width / 2, this.y - 8, this.lives * 4, 4)
     }
     else if (this.type === 'boss') {
-      context.fillStyle = 'red'
+      context.fillStyle = '#A53030'
       context.textAlign = 'left'
       context.font = `25px Arial`
       context.fillText(`BOSS`, 40, this.game.height - 50)

@@ -96,7 +96,7 @@ export default class Game {
           this.player.lives++
         }
         else {
-          if (!this.player.isHurt) {
+          if (!this.player.isHurt && enemy.lives > 0) {
             this.player.lives--
             this.player.isHurt = true
           }
@@ -133,7 +133,7 @@ export default class Game {
         })
       }
     })
-    this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion)
+    this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion || enemy.isHurt)
   }
 
   draw(context) {

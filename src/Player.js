@@ -119,7 +119,7 @@ export default class Player {
     // context.fillStyle = '#f00'
     // context.fillRect(this.x, this.y, this.width, this.height)
     context.drawImage(this.image, this.x - this.xOffset, this.y)
-    context.fillStyle = 'red'
+    context.fillStyle = '#A53030'
     context.fillRect(this.x - this.lives * 2 + this.width / 2, this.y - 8, this.lives * 4, 4)
 
     if (this.game.debug) {
