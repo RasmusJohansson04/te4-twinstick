@@ -11,6 +11,9 @@ export default class Skeleton extends Enemy {
     this.speed = 2
     this.lives = Math.floor(Math.random() * 3) + 1
     this.color = 'purple'
+    this.weight = 5
+    this.id = 1
+
     this.engagementDistance = 200
     this.projectiles = []
     this.shootTimer = 0

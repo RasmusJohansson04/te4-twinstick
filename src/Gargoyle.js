@@ -10,6 +10,8 @@ export default class Gargoyle extends Enemy {
         this.speed = 1
         this.lives = 20
         this.color = 'yellow'
+        this.weight = 1
+        this.id = 2
     }
 
     update(player) {

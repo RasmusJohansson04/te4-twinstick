@@ -1,13 +1,14 @@
 import InputHandler from './InputHandler.js'
 import Player from './Player.js'
 import UserInterface from './UserInterface.js'
-import Pumpkin from './Pumpkin.js'
+import Ghost from './Ghost.js'
 import Skeleton from './Skeleton.js'
 import Gargoyle from './Gargoyle.js'
 import Reaper from './Reaper.js'
 import Candy from './Candy.js'
 import Background from './Background.js'
 import LevelScreen from './LevelScreen.js'
+import WaveController from './WaveController.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
     this.width = width
@@ -35,6 +36,7 @@ export default class Game {
     this.background = new Background(this)
     this.player = new Player(this)
     this.lvlScreen = new LevelScreen(this)
+    this.waveController = new WaveController(this)
   }
 
   levelUp() {
@@ -52,6 +54,8 @@ export default class Game {
     }
 
     //* SPAWN ENEMIES
+
+
     if (this.enemyTimer > this.enemyInterval) {
       let items = ['north', 'west', 'south', 'east']
       let directions = items[Math.floor(Math.random() * items.length)]
@@ -70,16 +74,9 @@ export default class Game {
         y = Math.random() * this.height
         x = this.width - this.tileSize
       }
-      if (Math.random() < .05) {
-        this.enemies.push(new Reaper(this, x, y))
-      }
-      else if (Math.random() < .1) {
-        this.enemies.push(new Gargoyle(this, x, y))
-      }
-      else if (Math.random() < 0.2) {
-        this.enemies.push(new Skeleton(this, x, y))
-      } else {
-        this.enemies.push(new Pumpkin(this, x, y))
+      const nextEnemy = this.waveController.getNextEnemy(x, y)
+      if (nextEnemy) {
+        this.enemies.push(nextEnemy)
       }
       this.enemyTimer = 0
     } else {

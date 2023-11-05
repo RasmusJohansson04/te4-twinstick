@@ -2,7 +2,7 @@ import Enemy from './Enemy.js'
 import spriteImage from './assets/sprites/ghost.png'
 import spriteImage2 from './assets/sprites/ghost_hurt.png'
 
-export default class Pumpkin extends Enemy {
+export default class Ghost extends Enemy {
   constructor(game, x, y) {
     super(game)
     this.xOffset = 8
@@ -13,6 +13,8 @@ export default class Pumpkin extends Enemy {
     this.speed = 2
     this.lives = Math.floor(Math.random() * 3) + 1
     this.color = 'orange'
+    this.weight = 20
+    this.id = 0
 
     this.normalSprite = spriteImage
     this.hurtSprite = spriteImage2
