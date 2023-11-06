@@ -15,7 +15,7 @@ export default class WaveController {
         this.enemyIds = []
         this.weightTable = []
         this.spawnIntervals = [500, 400, 200, 600, 500]
-        this.spawnSchedule = ['standard', 'boss', 'horde', 'tank', 'boss']
+        this.spawnSchedule = ['standard', 'standard', 'horde', 'tank', 'boss', 'standard', 'tank', 'horde', 'tank', 'boss']
         this.wave = 0
 
         this.enemyList = new EnemyList(game)
@@ -38,7 +38,6 @@ export default class WaveController {
         this.wave++
         this.game.enemyInterval = this.spawnIntervals[0]
         if (this.spawnSchedule[0] === 'boss') {
-            this.enemyIds.push(-1)      //TILLFÄLLIGT DÅLIG LÖSNING
             this.enemyIds.push(3)
         }
         else {
@@ -49,11 +48,11 @@ export default class WaveController {
     }
 
     getNextEnemy(x, y) {
-        const enemyId = this.enemyIds.pop()
         if (this.enemyIds.length < 1 && this.game.enemies.length < 1) {
             this.nextWave()
         }
         else {
+            const enemyId = this.enemyIds.pop()
             return this.enemyList.getEnemyFromId(enemyId, x, y)
         }
     }
