@@ -4,7 +4,8 @@ export default class InputHandler {
     this.mouseX = 0
     this.mouseY = 0
     this.weaponType = 'arrow'
-    this.isPaused = false
+    this.play = document.querySelector('#play')
+    this.tutorial = document.querySelector('#tutorial')
     window.addEventListener('keydown', (event) => {
 
       if (!this.game.paused) {
@@ -46,6 +47,15 @@ export default class InputHandler {
           this.game.debug = !this.game.debug
         }
       }
+
+      if (event.key === 'Escape') {
+        this.game.paused = !this.game.paused
+      }
+    })
+
+    this.play.addEventListener("click", (event) => {
+      document.querySelector('#tutorial').classList.toggle('hidden')
+      this.game.paused = false
     })
 
     window.addEventListener('keyup', (event) => {

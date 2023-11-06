@@ -21,7 +21,7 @@ export default class Game {
     this.drops = []
 
     this.gameOver = false
-    this.paused = false
+    this.paused = true
 
     this.gravity = 1
     this.debug = false
