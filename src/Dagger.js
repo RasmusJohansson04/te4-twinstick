@@ -18,6 +18,9 @@ export default class Dagger extends Projectile {
         this.speed = 400
         this.damage = 1
         this.markedForDeletion = false
+
+        this.startPosition = { x, y }
+        this.maxDistance = 100
     }
 
     update(deltaTime) {
@@ -26,8 +29,13 @@ export default class Dagger extends Projectile {
             y: this.speed * Math.sin(this.angle),
         }
 
-        this.x += velocity.x * (deltaTime / 1000)
-        this.y += velocity.y * (deltaTime / 1000)
+        if (Math.abs(this.x - this.startPosition.x) < this.maxDistance && Math.abs(this.y - this.startPosition.y) < this.maxDistance) {
+            this.x += velocity.x * (deltaTime / 1000)
+            this.y += velocity.y * (deltaTime / 1000)
+        }
+        else {
+            this.markedForDeletion = true
+        }
 
         if (this.x > this.game.width) {
             this.markedForDeletion = true

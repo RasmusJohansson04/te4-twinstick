@@ -1,4 +1,4 @@
-export default class weaponTable {
+export default class WeaponTable {
     constructor(game) {
         this.game = game
         this.upgrades = [
