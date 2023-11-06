@@ -16,6 +16,7 @@ export default class UserInterface {
     context.textAlign = 'left'
     context.font = `${this.fontSize}px ${this.fontFamily}`
     context.fillText(`Ammo: ${this.game.player.ammo}`, 20, 30)
+    context.fillText(`[1] to [5] for weapons`, 20, 60)
 
     context.textAlign = 'center'
     context.fillText(`SCORE: ${(this.game.score)}`, this.game.width / 2, 30)

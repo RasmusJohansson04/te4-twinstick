@@ -55,7 +55,7 @@ export default class LevelScreen {
       usedIndexes.push(index)
       option.innerHTML = `
         <h1>${index}</h1>
-        <h2>To Level</h2>
+        <h2>Level 1</h2>
         <p>Description</p>
       `
     })

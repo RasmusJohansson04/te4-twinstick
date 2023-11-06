@@ -89,7 +89,9 @@ export default class Game {
     this.drops.forEach((drop) => {
       if (this.checkCollision(this.player, drop)) {
         drop.markedForDeletion = true
-        this.player.lives++
+        if (this.player.lives < this.player.maxLives) {
+          this.player.lives++
+        }
       }
     })
 

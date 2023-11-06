@@ -35,8 +35,8 @@ export default class Player {
     this.neededXp = 100
     this.level = 1
 
-    this.lives = 10
-    this.maxLives = 10
+    this.lives = 5
+    this.maxLives = 5
 
     this.weaponType = 0
 
