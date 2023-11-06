@@ -1,4 +1,3 @@
-import Projectile from './Projectile.js'
 import spriteImage from './assets/sprites/player.png'
 import spriteImage2 from './assets/sprites/player_hurt.png'
 import Arrow from './Arrow.js'
