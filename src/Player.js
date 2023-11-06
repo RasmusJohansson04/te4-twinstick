@@ -139,10 +139,8 @@ export default class Player {
     //   context.scale(-1, 1)
     //   context.drawImage(this.image, this.x - this.xOffset, this.y, this.width * -1, this.height)
     // }
-    else {
-      context.drawImage(this.image, this.x - this.xOffset, this.y, this.width, this.height)
-    }
-    context.restore()
+    // context.restore()
+    context.drawImage(this.image, this.x - this.xOffset, this.y, this.width, this.height)
 
     if (this.game.debug) {
       context.strokeStyle = '#000'
