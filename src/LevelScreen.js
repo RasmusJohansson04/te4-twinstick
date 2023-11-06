@@ -7,9 +7,32 @@ export default class LevelScreen {
       {
         name: "Lives",
         desc: "Increases the players lives.",
-        link: game.player.lives,
-        level: 1,
-        upgradeAmount: 1
+        link: game.player.lives
+      },
+      {
+        name: "Expanded quiver",
+        desc: "Increases the players max amount of lives",
+        link: game.player.maxAmmo
+      },
+      {
+        name: "Boots of Phidippides",
+        desc: "Increases the players speed",
+        link: game.player.maxAmmo
+      },
+      {
+        name: "Sleight of Hand",
+        desc: "Increases firerate of weapons",
+        link: game.player.maxAmmo
+      },
+      {
+        name: "Bow of Apollo",
+        desc: "Increases the players max amount of lives",
+        link: game.player.maxAmmo
+      },
+      {
+        name: "Expanded quiver",
+        desc: "Increases the players max amount of lives",
+        link: game.player.maxAmmo
       },
     ]
     this.options.forEach(option => {

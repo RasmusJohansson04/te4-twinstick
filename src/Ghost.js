@@ -16,6 +16,9 @@ export default class Ghost extends Enemy {
     this.weight = 20
     this.id = 0
 
+    this.score = 10
+    this.xp = 10
+
     this.normalSprite = spriteImage
     this.hurtSprite = spriteImage2
 

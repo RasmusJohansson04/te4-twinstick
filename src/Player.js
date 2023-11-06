@@ -61,6 +61,7 @@ export default class Player {
     if (this.xp >= this.neededXp) {
       this.xp = this.xp - this.neededXp
       this.level++
+      this.neededXp = Math.ceil(this.neededXp * 1.4)
       this.game.levelUp()
     }
 

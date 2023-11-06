@@ -14,6 +14,9 @@ export default class Skeleton extends Enemy {
     this.weight = 5
     this.id = 1
 
+    this.score = 25
+    this.xp = 20
+
     this.engagementDistance = 200
     this.projectiles = []
     this.shootTimer = 0

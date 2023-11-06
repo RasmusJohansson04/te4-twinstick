@@ -18,10 +18,10 @@ export default class UserInterface {
     context.fillText(`Ammo: ${this.game.player.ammo}`, 20, 30)
 
     context.textAlign = 'center'
-    context.fillText(`SCORE: ${(this.game.gameTime * 0.001).toFixed(1)}`, this.game.width / 2, 30)
+    context.fillText(`SCORE: ${(this.game.score)}`, this.game.width / 2, 30)
     context.fillText(`Time: ${(this.game.gameTime * 0.001).toFixed(1)}`, this.game.width / 2, 60)
     context.textAlign = 'right'
-    context.fillText(`WAVE: ${(this.game.gameTime * 0.001).toFixed(1)}`, this.game.width - 20, 30)
+    context.fillText(`WAVE: ${(this.game.waveController.wave)}`, this.game.width - 20, 30)
 
     context.fillStyle = 'cyan'
     context.fillRect(0, this.game.height - 4, (this.game.player.xp / this.game.player.neededXp) * this.game.width, 4)

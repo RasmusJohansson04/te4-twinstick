@@ -17,6 +17,9 @@ export default class Reaper extends Enemy {
         this.shootTimer = 0
         this.shootInterval = 400
         this.type = 'boss'
+
+        this.score = 100
+        this.xp = 100
     }
 
     update(player, deltaTime) {

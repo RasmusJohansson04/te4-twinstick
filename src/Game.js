@@ -31,6 +31,7 @@ export default class Game {
     this.hasWave = true
     this.waveTimer = 0
     this.waveInterval = 1000
+    this.score = 0
     this.tileSize = 16
 
     this.background = new Background(this)
@@ -100,12 +101,14 @@ export default class Game {
         }
       }
       this.player.projectiles.forEach((projectile) => {
-        if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy' && projectile.hasHit.indexOf(enemy) === -1) {
+        if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy' && projectile.hasHit.indexOf(enemy) === -1 && !enemy.markedForDeletion) {
           enemy.isHurt = true
           enemy.lives -= projectile.damage
           if (enemy.lives <= 0) {
             enemy.markedForDeletion = true
-            this.player.xp += 10
+            this.player.xp += enemy.xp
+            this.score += enemy.score
+
             if (Math.random() > .8) {
               this.enemies.push(new Candy(this, enemy.x, enemy.y))
             }
