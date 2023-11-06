@@ -3,7 +3,7 @@ export default class InputHandler {
     this.game = game
     this.mouseX = 0
     this.mouseY = 0
-    this.weaponType = 0
+    this.weaponType = 'arrow'
     this.isPaused = false
     window.addEventListener('keydown', (event) => {
 

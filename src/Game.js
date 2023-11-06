@@ -18,6 +18,7 @@ export default class Game {
     this.ui = new UserInterface(this)
     this.keys = []
     this.enemies = []
+    this.drops = []
 
     this.gameOver = false
     this.paused = false
@@ -85,20 +86,22 @@ export default class Game {
     }
     this.player.update(deltaTime)
 
+    this.drops.forEach((drop) => {
+      if (this.checkCollision(this.player, drop)) {
+        drop.markedForDeletion = true
+        this.player.lives++
+      }
+    })
+
     this.enemies.forEach((enemy) => {
       enemy.update(this.player, deltaTime)
       enemy.hurt(deltaTime)
       if (this.checkCollision(this.player, enemy)) {
-        if (enemy.type === 'candy') {
-          enemy.markedForDeletion = true
-          this.player.lives++
+        if (!this.player.isHurt && enemy.lives > 0) {
+          this.player.lives--
+          this.player.isHurt = true
         }
-        else {
-          if (!this.player.isHurt && enemy.lives > 0) {
-            this.player.lives--
-            this.player.isHurt = true
-          }
-        }
+
       }
       this.player.projectiles.forEach((projectile) => {
         if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy' && projectile.hasHit.indexOf(enemy) === -1 && !enemy.markedForDeletion) {
@@ -110,7 +113,7 @@ export default class Game {
             this.score += enemy.score
 
             if (Math.random() > .8) {
-              this.enemies.push(new Candy(this, enemy.x, enemy.y))
+              this.drops.push(new Candy(this, enemy.x, enemy.y))
             }
           }
           if (!projectile.penetrate) {
@@ -134,6 +137,7 @@ export default class Game {
       }
     })
     this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion || enemy.isHurt)
+    this.drops = this.drops.filter((drop) => !drop.markedForDeletion)
   }
 
   draw(context) {
@@ -141,6 +145,9 @@ export default class Game {
     this.player.draw(context)
     this.enemies.forEach((enemy) => {
       enemy.draw(context)
+    })
+    this.drops.forEach((drop) => {
+      drop.draw(context)
     })
     // this.lvlScreen.draw(context)
     this.ui.draw(context)
