@@ -99,7 +99,7 @@ export default class Game {
       enemy.update(this.player, deltaTime)
       enemy.hurt(deltaTime)
       if (this.checkCollision(this.player, enemy)) {
-        if (!this.player.isHurt && enemy.lives > 0) {
+        if (!this.player.isInvulnerable && enemy.lives > 0) {
           this.player.lives--
           this.player.isHurt = true
         }
@@ -130,7 +130,7 @@ export default class Game {
         enemy.projectiles.forEach((projectile) => {
           if (this.checkCollision(projectile, this.player)) {
             projectile.markedForDeletion = true
-            if (!this.player.isHurt) {
+            if (!this.player.isInvulnerable) {
               this.player.lives--
               this.player.isHurt = true
             }

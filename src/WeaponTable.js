@@ -5,8 +5,10 @@ export default class WeaponTable {
             {
                 name: "Arrow",
                 damage: 1,
+                fireRate: 1,
                 level: 1,
-                upgradeAmount: 1
+                upgradeAmount: 1,
+                upgradePath: []
             },
             {
                 name: "Dagger",
@@ -28,6 +30,18 @@ export default class WeaponTable {
             },
             {
                 name: "Exsanguinate",
+                damage: 4,
+                level: 1,
+                upgradeAmount: 1
+            },
+            {
+                name: "Health",
+                damage: 4,
+                level: 1,
+                upgradeAmount: 1
+            },
+            {
+                name: "Stamina",
                 damage: 4,
                 level: 1,
                 upgradeAmount: 1

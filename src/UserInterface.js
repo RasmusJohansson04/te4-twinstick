@@ -13,11 +13,15 @@ export default class UserInterface {
     context.shadowOffsetY = 2
     context.shadowColor = 'black'
 
-    context.textAlign = 'left'
+    context.fillStyle = '#A53030'
     context.font = `${this.fontSize}px ${this.fontFamily}`
-    context.fillText(`Ammo: ${this.game.player.ammo}`, 20, 30)
-    context.fillText(`[1] to [5] for weapons`, 20, 60)
+    context.fillRect(20, 20, (this.game.player.lives / this.game.player.maxLives) * 150, 4)
 
+    context.fillStyle = 'green'
+    context.font = `${this.fontSize}px ${this.fontFamily}`
+    context.fillRect(20, 40, (this.game.player.stamina / this.game.player.maxStamina) * 100, 4)
+
+    context.fillStyle = 'white'
     context.textAlign = 'center'
     context.fillText(`SCORE: ${(this.game.score)}`, this.game.width / 2, 30)
     context.fillText(`Time: ${(this.game.gameTime * 0.001).toFixed(1)}`, this.game.width / 2, 60)

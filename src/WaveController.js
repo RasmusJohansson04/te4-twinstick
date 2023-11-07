@@ -11,10 +11,10 @@ export default class WaveController {
         this.intensityMultiplier = 1.05
         this.manpowerMultiplier = 1.15
 
-        this.enemyManpower = 10
+        this.enemyManpower = 20
         this.enemyIds = []
         this.weightTable = []
-        this.spawnIntervals = [500, 400, 200, 600, 500]
+        this.spawnIntervals = [100, 300, 200, 400, 500]
         this.spawnSchedule = ['standard', 'standard', 'horde', 'tank', 'boss', 'standard', 'tank', 'horde', 'tank', 'boss']
         this.wave = 0
 

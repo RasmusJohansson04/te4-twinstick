@@ -1,42 +1,15 @@
+import WeaponTable from "./WeaponTable"
+
 export default class LevelScreen {
   constructor(game) {
     this.game = game
     this.show = false
     this.options = document.querySelectorAll('.option')
-    this.upgrades = [
-      {
-        name: "Lives",
-        desc: "Increases the players lives.",
-        link: game.player.lives
-      },
-      {
-        name: "Expanded quiver",
-        desc: "Increases the players max amount of lives",
-        link: game.player.maxAmmo
-      },
-      {
-        name: "Boots of Phidippides",
-        desc: "Increases the players speed",
-        link: game.player.maxAmmo
-      },
-      {
-        name: "Sleight of Hand",
-        desc: "Increases firerate of weapons",
-        link: game.player.maxAmmo
-      },
-      {
-        name: "Bow of Apollo",
-        desc: "Increases the players max amount of lives",
-        link: game.player.maxAmmo
-      },
-      {
-        name: "Expanded quiver",
-        desc: "Increases the players max amount of lives",
-        link: game.player.maxAmmo
-      },
-    ]
+    this.table = new WeaponTable(game)
+    this.upgrades = this.table.upgrades
     this.options.forEach(option => {
       option.addEventListener("click", (event) => {
+        this.upgrades[option.id].level += 1
         document.querySelector('#lvl').classList.toggle('hidden')
         game.paused = false
       })
@@ -54,8 +27,8 @@ export default class LevelScreen {
       option.id = index
       usedIndexes.push(index)
       option.innerHTML = `
-        <h1>${index}</h1>
-        <h2>Level 1</h2>
+        <h1>${this.upgrades[index].name}</h1>
+        <h2>LEVEL ${this.upgrades[index].level}</h2>
         <p>Description</p>
       `
     })

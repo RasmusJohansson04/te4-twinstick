@@ -23,6 +23,10 @@ export default class InputHandler {
           this.game.keys.push(event.key)
         }
 
+        if (event.key === ' ') {
+          this.game.player.dodge()
+        }
+
         if (event.key === '1') {
           this.weaponType = 'arrow'
         }

@@ -9,7 +9,7 @@ export default class Skeleton extends Enemy {
     this.x = x
     this.y = y
     this.speed = 2
-    this.lives = Math.floor(Math.random() * 3) + 1
+    this.lives = 1
     this.color = 'purple'
     this.weight = 5
     this.id = 1

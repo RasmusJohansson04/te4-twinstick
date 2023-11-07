@@ -11,7 +11,7 @@ export default class Player {
   constructor(game) {
     this.game = game
     this.xOffset = 8
-    this.width = 32
+    this.width = 16
     this.height = 32
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
@@ -20,7 +20,7 @@ export default class Player {
 
     this.speedX = 0
     this.speedY = 0
-    this.maxSpeed = 4
+    this.maxSpeed = 3
 
     const image = new Image()
     image.src = spriteImage
@@ -37,26 +37,71 @@ export default class Player {
     this.neededXp = 100
     this.level = 1
 
-    this.lives = 5
-    this.maxLives = 5
+    this.lives = 3
+    this.maxLives = 3
+
+    this.stamina = 2
+    this.maxStamina = 2
+    this.staminaTimer = 0
+    this.staminaInterval = 1000
 
     this.weaponType = 0
 
     this.isHurt = false
     this.hurtTimer = 0
     this.hurtInterval = 300
+
+    this.isDodging = false
+    this.dodgeTimer = 0
+    this.dodgeInterval = 400
+
+    this.isInvulnerable = false
+  }
+
+  dodge() {
+    if (this.stamina > 0) {
+      this.maxSpeed = 6
+      this.isDodging = true
+      this.isInvulnerable = true
+      this.stamina -= 1
+    }
   }
 
   update(deltaTime) {
+    if (this.stamina < this.maxStamina) {
+      if (this.staminaTimer < this.staminaInterval) {
+        this.staminaTimer += deltaTime
+      }
+      else {
+        this.stamina += 1
+        this.staminaTimer = 0
+      }
+    }
+    if (this.isDodging) {
+      if (this.dodgeTimer < this.dodgeInterval) {
+        this.dodgeTimer += deltaTime
+        this.image.src = spriteImage2
+      }
+      else {
+        this.image.src = spriteImage
+        this.isDodging = false
+        this.isInvulnerable = false
+        this.dodgeTimer = 0
+        this.maxSpeed = 3
+      }
+    }
+
     if (this.isHurt) {
       if (this.hurtTimer < this.hurtInterval) {
         this.hurtTimer += deltaTime
+        this.isInvulnerable = true
         this.image.src = spriteImage2
       }
       else {
         this.image.src = spriteImage
         this.isHurt = false
         this.hurtTimer = 0
+        this.isInvulnerable = false
       }
     }
 
@@ -127,8 +172,6 @@ export default class Player {
   draw(context) {
     // context.fillStyle = '#f00'
     // context.fillRect(this.x, this.y, this.width, this.height)
-    context.fillStyle = '#A53030'
-    context.fillRect(this.x - this.lives * 2 + this.width / 2, this.y - 8, this.lives * 4, 4)
 
     this.projectiles.forEach((projectile) => {
       projectile.draw(context)
@@ -140,7 +183,7 @@ export default class Player {
     //   context.drawImage(this.image, this.x - this.xOffset, this.y, this.width * -1, this.height)
     // }
     // context.restore()
-    context.drawImage(this.image, this.x - this.xOffset, this.y, this.width, this.height)
+    context.drawImage(this.image, this.x - this.width / 2, this.y)
 
     if (this.game.debug) {
       context.strokeStyle = '#000'
