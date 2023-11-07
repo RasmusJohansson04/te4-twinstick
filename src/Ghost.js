@@ -10,7 +10,7 @@ export default class Ghost extends Enemy {
     this.height = 32
     this.x = x
     this.y = y
-    this.speed = 2
+    this.speed = 1
     this.lives = Math.floor(Math.random() * 2) + 1
     this.color = 'orange'
     this.weight = 20

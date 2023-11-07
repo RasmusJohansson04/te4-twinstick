@@ -20,7 +20,7 @@ export default class Dagger extends Projectile {
         this.markedForDeletion = false
 
         this.startPosition = { x, y }
-        this.maxDistance = 100
+        this.maxDistance = 200
     }
 
     update(deltaTime) {

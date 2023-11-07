@@ -2,6 +2,7 @@ import Game from './Game'
 
 export function setup(canvas) {
   const ctx = canvas.getContext('2d')
+  ctx.imageSmoothingEnabled = false
   canvas.width = 1280
   canvas.height = 720
 

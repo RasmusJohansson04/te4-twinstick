@@ -49,7 +49,7 @@ export default class Player {
 
     this.isHurt = false
     this.hurtTimer = 0
-    this.hurtInterval = 300
+    this.hurtInterval = 500
 
     this.isDodging = false
     this.dodgeTimer = 0
@@ -60,7 +60,7 @@ export default class Player {
 
   dodge() {
     if (this.stamina > 0) {
-      this.maxSpeed = 6
+      this.maxSpeed = 8
       this.isDodging = true
       this.isInvulnerable = true
       this.stamina -= 1
@@ -117,7 +117,7 @@ export default class Player {
     }
 
     if (this.game.keys.includes('a') && this.x - this.maxSpeed > 0) {
-      this.speedX = -this.maxSpeed
+      this.speedX = -this.maxSpeed /* * (deltaTime / 1000) */
 
     } else if (
       this.game.keys.includes('d') &&

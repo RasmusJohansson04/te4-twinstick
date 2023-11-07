@@ -8,7 +8,7 @@ export default class Skeleton extends Enemy {
     this.height = 16
     this.x = x
     this.y = y
-    this.speed = 2
+    this.speed = 1
     this.lives = 1
     this.color = 'purple'
     this.weight = 5
