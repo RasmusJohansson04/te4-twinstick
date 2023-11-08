@@ -1,5 +1,8 @@
 import spriteImage from './assets/sprites/player.png'
-import spriteImage2 from './assets/sprites/player_hurt.png'
+import playerHurt from './assets/sprites/player_hurt.png'
+import playerWalk from './assets/sprites/player_walk.png'
+import playerIdle from './assets/sprites/player_idle.png'
+
 import Arrow from './Arrow.js'
 import Dagger from './Dagger.js'
 import Spear from './Spear.js'
@@ -11,7 +14,7 @@ export default class Player {
   constructor(game) {
     this.game = game
     this.xOffset = 8
-    this.width = 16
+    this.width = 32
     this.height = 32
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
@@ -23,10 +26,34 @@ export default class Player {
     this.maxSpeed = 3
 
     const image = new Image()
-    image.src = spriteImage
+    image.src = playerWalk
     this.image = image
 
-    this.mirror = false
+    //!   Sprite Animation
+
+    this.frameX = 0
+    this.frameY = 0
+    this.flip = false
+
+    this.idleAnimation = {
+      spriteSheet: playerIdle,
+      maxFrame: 2
+    }
+
+    this.walkAnimation = {
+      spriteSheet: playerWalk,
+      maxFrame: 4
+    }
+
+    this.hurtAnimation = {
+      spriteSheet: playerHurt,
+      maxFrame: 1
+    }
+
+    this.maxFrame = 4
+    this.fps = 4
+    this.spriteTimer = 0
+    this.interval = 1000 / this.fps
 
     this.maxAmmo = 20
     this.ammo = 20
@@ -56,6 +83,7 @@ export default class Player {
     this.dodgeInterval = 400
 
     this.isInvulnerable = false
+    this.isIdle = false
   }
 
   dodge() {
@@ -64,6 +92,23 @@ export default class Player {
       this.isDodging = true
       this.isInvulnerable = true
       this.stamina -= 1
+    }
+  }
+
+  setSprite(spriteName) {
+    switch (spriteName) {
+      case 'walk':
+        this.image.src = this.walkAnimation.spriteSheet
+        this.maxFrame = this.walkAnimation.maxFrame
+        break
+      case 'idle':
+        this.image.src = this.idleAnimation.spriteSheet
+        this.maxFrame = this.idleAnimation.maxFrame
+        break
+      case 'hurt':
+        this.image.src = this.hurtAnimation.spriteSheet
+        this.maxFrame = this.hurtAnimation.maxFrame
+        break
     }
   }
 
@@ -80,10 +125,13 @@ export default class Player {
     if (this.isDodging) {
       if (this.dodgeTimer < this.dodgeInterval) {
         this.dodgeTimer += deltaTime
-        this.image.src = spriteImage2
+        this.setSprite('hurt')
       }
       else {
-        this.image.src = spriteImage
+        if (!this.isIdle) {
+          this.isIdle = true
+          this.setSprite('idle')
+        }
         this.isDodging = false
         this.isInvulnerable = false
         this.dodgeTimer = 0
@@ -95,10 +143,13 @@ export default class Player {
       if (this.hurtTimer < this.hurtInterval) {
         this.hurtTimer += deltaTime
         this.isInvulnerable = true
-        this.image.src = spriteImage2
+        this.setSprite('hurt')
       }
       else {
-        this.image.src = spriteImage
+        if (!this.isIdle) {
+          this.isIdle = true
+          this.setSprite('idle')
+        }
         this.isHurt = false
         this.hurtTimer = 0
         this.isInvulnerable = false
@@ -145,9 +196,32 @@ export default class Player {
     }
 
     if (this.speedX < 0) {
-      this.mirror = true
+      this.flip = true
     } else if (this.speedX > 0) {
-      this.mirror = false
+      this.flip = false
+    }
+
+    if (this.speedY !== 0 || this.speedX !== 0) {
+      this.setSprite('walk')
+      this.isIdle = false
+    }
+    else {
+      if (!this.isIdle) {
+        this.isIdle = true
+        this.setSprite('idle')
+      }
+    }
+
+    //! Sprite animation update
+    if (this.spriteTimer > this.interval) {
+      this.frameX++
+      this.spriteTimer = 0
+    } else {
+      this.spriteTimer += deltaTime
+    }
+
+    if (this.frameX >= this.maxFrame) {
+      this.frameX = 0
     }
 
     this.y += this.speedY
@@ -177,13 +251,32 @@ export default class Player {
       projectile.draw(context)
     })
 
-    // if (this.mirror) {
+    // if (this.flip) {
     //   context.save()
     //   context.scale(-1, 1)
     //   context.drawImage(this.image, this.x - this.xOffset, this.y, this.width * -1, this.height)
     // }
     // context.restore()
-    context.drawImage(this.image, this.x - this.width / 2, this.y)
+    //context.drawImage(this.image, this.x - this.width / 2, this.y)
+
+    if (this.flip) {
+      context.save()
+      context.scale(-1, 1)
+    }
+
+    context.drawImage(
+      this.image,
+      this.frameX * this.width,
+      this.frameY * this.height,
+      this.width,
+      this.height,
+      this.flip ? this.x * -1 - this.width : this.x,
+      this.y,
+      this.width,
+      this.height
+    )
+
+    context.restore()
 
     if (this.game.debug) {
       context.strokeStyle = '#000'
