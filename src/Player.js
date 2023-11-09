@@ -67,8 +67,8 @@ export default class Player {
     this.lives = 3
     this.maxLives = 3
 
-    this.stamina = 2
-    this.maxStamina = 2
+    this.stamina = 100
+    this.maxStamina = 100
     this.staminaTimer = 0
     this.staminaInterval = 1000
 
@@ -84,6 +84,7 @@ export default class Player {
 
     this.isInvulnerable = false
     this.isIdle = false
+    this.cooldown = true
   }
 
   dodge() {
@@ -91,7 +92,7 @@ export default class Player {
       this.maxSpeed = 8
       this.isDodging = true
       this.isInvulnerable = true
-      this.stamina -= 1
+      this.minusStamina(50)
       this.setSprite('hurt')
     }
   }
@@ -123,15 +124,31 @@ export default class Player {
     }
   }
 
+  minusStamina(amount) {
+    this.stamina = Math.max(0, Math.min(this.stamina - amount, this.maxStamina));
+    this.cooldown = false
+  }
+
   update(deltaTime) {
-    if (this.stamina < this.maxStamina) {
+    if (!this.cooldown) {
       if (this.staminaTimer < this.staminaInterval) {
         this.staminaTimer += deltaTime
       }
       else {
-        this.stamina += 1
+        this.cooldown = true
         this.staminaTimer = 0
       }
+    }
+
+    if (this.stamina < this.maxStamina && this.cooldown) {
+      this.stamina += deltaTime / 40
+      // if (this.staminaTimer < this.staminaInterval) {
+      //   this.staminaTimer += deltaTime
+      // }
+      // else {
+      //   this.stamina += 1
+      //   this.staminaTimer = 0
+      // }
     }
 
     if (this.xp >= this.neededXp) {
@@ -303,6 +320,7 @@ export default class Player {
   }
 
   arrow(mouseX, mouseY) {
+    this.minusStamina(5)
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
@@ -318,6 +336,7 @@ export default class Player {
   }
 
   dagger(mouseX, mouseY) {
+    this.minusStamina(15)
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
@@ -349,6 +368,7 @@ export default class Player {
   }
 
   spear(mouseX, mouseY) {
+    this.minusStamina(20)
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
@@ -364,6 +384,7 @@ export default class Player {
   }
 
   sword(mouseX, mouseY) {
+    this.minusStamina(25)
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
@@ -379,6 +400,7 @@ export default class Player {
   }
 
   exsanguinate(mouseX, mouseY) {
+    this.minusStamina(15)
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)

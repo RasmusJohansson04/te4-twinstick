@@ -79,7 +79,7 @@ export default class InputHandler {
     })
 
     window.addEventListener('mousedown', (event) => {
-      if (!this.game.paused) {
+      if (!this.game.paused && this.game.player.stamina > 0) {
         switch (this.weaponType) {
           case 'arrow':
             this.game.player.arrow(this.mouseX, this.mouseY)
