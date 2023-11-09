@@ -100,14 +100,17 @@ export default class Player {
       case 'walk':
         this.image.src = this.walkAnimation.spriteSheet
         this.maxFrame = this.walkAnimation.maxFrame
+        this.interval = 1000 / this.fps
         break
       case 'idle':
         this.image.src = this.idleAnimation.spriteSheet
         this.maxFrame = this.idleAnimation.maxFrame
+        this.interval = 1000 / this.fps
         break
       case 'hurt':
         this.image.src = this.hurtAnimation.spriteSheet
         this.maxFrame = this.hurtAnimation.maxFrame
+        this.interval = this.dodgeInterval
         break
     }
   }
@@ -120,39 +123,6 @@ export default class Player {
       else {
         this.stamina += 1
         this.staminaTimer = 0
-      }
-    }
-    if (this.isDodging) {
-      if (this.dodgeTimer < this.dodgeInterval) {
-        this.dodgeTimer += deltaTime
-        this.setSprite('hurt')
-      }
-      else {
-        if (!this.isIdle) {
-          this.isIdle = true
-          this.setSprite('idle')
-        }
-        this.isDodging = false
-        this.isInvulnerable = false
-        this.dodgeTimer = 0
-        this.maxSpeed = 3
-      }
-    }
-
-    if (this.isHurt) {
-      if (this.hurtTimer < this.hurtInterval) {
-        this.hurtTimer += deltaTime
-        this.isInvulnerable = true
-        this.setSprite('hurt')
-      }
-      else {
-        if (!this.isIdle) {
-          this.isIdle = true
-          this.setSprite('idle')
-        }
-        this.isHurt = false
-        this.hurtTimer = 0
-        this.isInvulnerable = false
       }
     }
 
@@ -209,6 +179,40 @@ export default class Player {
       if (!this.isIdle) {
         this.isIdle = true
         this.setSprite('idle')
+      }
+    }
+
+    if (this.isDodging) {
+      if (this.dodgeTimer < this.dodgeInterval) {
+        this.dodgeTimer += deltaTime
+        this.setSprite('hurt')
+      }
+      else {
+        if (!this.isIdle) {
+          this.isIdle = true
+          this.setSprite('idle')
+        }
+        this.isDodging = false
+        this.isInvulnerable = false
+        this.dodgeTimer = 0
+        this.maxSpeed = 3
+      }
+    }
+
+    if (this.isHurt) {
+      if (this.hurtTimer < this.hurtInterval) {
+        this.hurtTimer += deltaTime
+        this.isInvulnerable = true
+        this.setSprite('hurt')
+      }
+      else {
+        if (!this.isIdle) {
+          this.isIdle = true
+          this.setSprite('idle')
+        }
+        this.isHurt = false
+        this.hurtTimer = 0
+        this.isInvulnerable = false
       }
     }
 
