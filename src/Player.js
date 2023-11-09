@@ -92,7 +92,15 @@ export default class Player {
       this.isDodging = true
       this.isInvulnerable = true
       this.stamina -= 1
+      this.setSprite('hurt')
     }
+  }
+
+  hurt() {
+    this.lives -= 1
+    this.isInvulnerable = true
+    this.isHurt = true
+    this.setSprite('hurt')
   }
 
   setSprite(spriteName) {
@@ -172,7 +180,9 @@ export default class Player {
     }
 
     if (this.speedY !== 0 || this.speedX !== 0) {
-      this.setSprite('walk')
+      if (!this.isInvulnerable) {
+        this.setSprite('walk')
+      }
       this.isIdle = false
     }
     else {
@@ -185,13 +195,10 @@ export default class Player {
     if (this.isDodging) {
       if (this.dodgeTimer < this.dodgeInterval) {
         this.dodgeTimer += deltaTime
-        this.setSprite('hurt')
       }
       else {
-        if (!this.isIdle) {
-          this.isIdle = true
-          this.setSprite('idle')
-        }
+        this.isIdle = true
+        this.setSprite('idle')
         this.isDodging = false
         this.isInvulnerable = false
         this.dodgeTimer = 0
@@ -202,14 +209,10 @@ export default class Player {
     if (this.isHurt) {
       if (this.hurtTimer < this.hurtInterval) {
         this.hurtTimer += deltaTime
-        this.isInvulnerable = true
-        this.setSprite('hurt')
       }
       else {
-        if (!this.isIdle) {
-          this.isIdle = true
-          this.setSprite('idle')
-        }
+        this.isIdle = true
+        this.setSprite('idle')
         this.isHurt = false
         this.hurtTimer = 0
         this.isInvulnerable = false
@@ -380,7 +383,8 @@ export default class Player {
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
     )
-    this.lives--
+    this.hurt()
+
 
     this.projectiles.push(
       new Exsanguinate(
