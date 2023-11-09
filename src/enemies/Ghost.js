@@ -6,12 +6,13 @@ export default class Ghost extends Enemy {
   constructor(game, x, y) {
     super(game)
     this.xOffset = 8
-    this.width = 16
+    this.width = 32
     this.height = 32
     this.x = x
     this.y = y
     this.speed = 1
     this.lives = Math.floor(Math.random() * 2) + 1
+    this.maxLives = this.lives
     this.color = 'orange'
     this.weight = 20
     this.id = 0
