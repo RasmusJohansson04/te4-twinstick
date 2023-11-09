@@ -15,11 +15,11 @@ export default class UserInterface {
 
     context.fillStyle = '#A53030'
     context.font = `${this.fontSize}px ${this.fontFamily}`
-    context.fillRect(20, 20, (this.game.player.lives / this.game.player.maxLives) * 100, 4)
+    context.fillRect(this.game.player.x - 8, this.game.player.y - 16, (this.game.player.lives / this.game.player.maxLives) * 50, 4)
 
     context.fillStyle = 'green'
     context.font = `${this.fontSize}px ${this.fontFamily}`
-    context.fillRect(20, 40, (this.game.player.stamina / this.game.player.maxStamina) * 100, 4)
+    context.fillRect(this.game.player.x - 8, this.game.player.y - 8, (this.game.player.stamina / this.game.player.maxStamina) * 50, 4)
 
     context.fillStyle = 'white'
     context.textAlign = 'center'

@@ -142,13 +142,6 @@ export default class Player {
 
     if (this.stamina < this.maxStamina && this.cooldown) {
       this.stamina += deltaTime / 40
-      // if (this.staminaTimer < this.staminaInterval) {
-      //   this.staminaTimer += deltaTime
-      // }
-      // else {
-      //   this.stamina += 1
-      //   this.staminaTimer = 0
-      // }
     }
 
     if (this.xp >= this.neededXp) {
