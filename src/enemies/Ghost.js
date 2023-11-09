@@ -1,6 +1,6 @@
 import Enemy from './Enemy.js'
-import spriteImage from './assets/sprites/ghost.png'
-import spriteImage2 from './assets/sprites/ghost_hurt.png'
+import spriteImage from '../assets/sprites/ghost.png'
+import spriteImage2 from '../assets/sprites/ghost_hurt.png'
 
 export default class Ghost extends Enemy {
   constructor(game, x, y) {

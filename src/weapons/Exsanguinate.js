@@ -1,7 +1,7 @@
 import Projectile from './Projectile'
-import spriteImage from './assets/sprites/sword.png'
+import spriteImage from '../assets/sprites/sword.png'
 
-export default class Spear extends Projectile {
+export default class Exsanguinate extends Projectile {
     constructor(game, x, y, angle) {
         super(game)
         this.game = game

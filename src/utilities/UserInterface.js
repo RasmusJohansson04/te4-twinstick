@@ -15,7 +15,7 @@ export default class UserInterface {
 
     context.fillStyle = '#A53030'
     context.font = `${this.fontSize}px ${this.fontFamily}`
-    context.fillRect(20, 20, (this.game.player.lives / this.game.player.maxLives) * 150, 4)
+    context.fillRect(20, 20, (this.game.player.lives / this.game.player.maxLives) * 100, 4)
 
     context.fillStyle = 'green'
     context.font = `${this.fontSize}px ${this.fontFamily}`

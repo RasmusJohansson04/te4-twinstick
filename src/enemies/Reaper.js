@@ -1,5 +1,5 @@
 import Enemy from './Enemy.js'
-import Arrow from './Arrow.js'
+import Arrow from '../weapons/Arrow.js'
 
 export default class Reaper extends Enemy {
     constructor(game, x, y) {

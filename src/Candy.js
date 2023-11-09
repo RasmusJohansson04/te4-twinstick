@@ -1,4 +1,4 @@
-import Enemy from './Enemy'
+import Enemy from './enemies/Enemy'
 
 export default class Candy extends Enemy {
   constructor(game, x, y) {

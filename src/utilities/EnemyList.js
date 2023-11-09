@@ -1,7 +1,7 @@
-import Ghost from './Ghost.js'
-import Skeleton from './Skeleton.js'
-import Gargoyle from './Gargoyle.js'
-import Reaper from './Reaper.js'
+import Ghost from '../enemies/Ghost.js'
+import Skeleton from '../enemies/Skeleton.js'
+import Gargoyle from '../enemies/Gargoyle.js'
+import Reaper from '../enemies/Reaper.js'
 
 export default class EnemyList {
     constructor(game) {

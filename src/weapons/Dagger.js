@@ -1,5 +1,5 @@
 import Projectile from './Projectile'
-import spriteImage from './assets/sprites/arrow.png'
+import spriteImage from '../assets/sprites/arrow.png'
 
 export default class Dagger extends Projectile {
     constructor(game, x, y, angle) {

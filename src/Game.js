@@ -1,14 +1,14 @@
-import InputHandler from './InputHandler.js'
+import InputHandler from './utilities/InputHandler.js'
 import Player from './Player.js'
-import UserInterface from './UserInterface.js'
-import Ghost from './Ghost.js'
-import Skeleton from './Skeleton.js'
-import Gargoyle from './Gargoyle.js'
-import Reaper from './Reaper.js'
+import UserInterface from './utilities/UserInterface.js'
+import Ghost from './enemies/Ghost.js'
+import Skeleton from './enemies/Skeleton.js'
+import Gargoyle from './enemies/Gargoyle.js'
+import Reaper from './enemies/Reaper.js'
 import Candy from './Candy.js'
-import Background from './Background.js'
-import LevelScreen from './LevelScreen.js'
-import WaveController from './WaveController.js'
+import Background from './utilities/Background.js'
+import LevelScreen from './utilities/LevelScreen.js'
+import WaveController from './utilities/WaveController.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
     this.width = width

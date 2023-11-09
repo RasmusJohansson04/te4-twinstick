@@ -1,5 +1,5 @@
 import Projectile from './Projectile'
-import spriteImage from './assets/sprites/sword.png'
+import spriteImage from '../assets/sprites/sword.png'
 
 export default class Sword extends Projectile {
     constructor(game, x, y, angle) {

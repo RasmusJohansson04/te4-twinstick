@@ -3,11 +3,11 @@ import playerHurt from './assets/sprites/player_hurt.png'
 import playerWalk from './assets/sprites/player_walk.png'
 import playerIdle from './assets/sprites/player_idle.png'
 
-import Arrow from './Arrow.js'
-import Dagger from './Dagger.js'
-import Spear from './Spear.js'
-import Sword from './Sword.js'
-import Exsanguinate from './Exsanguinate.js'
+import Arrow from './weapons/Arrow.js'
+import Dagger from './weapons/Dagger.js'
+import Spear from './weapons/Spear.js'
+import Sword from './weapons/Sword.js'
+import Exsanguinate from './weapons/Exsanguinate.js'
 
 
 export default class Player {
