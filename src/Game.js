@@ -14,8 +14,6 @@ export default class Game {
     this.width = width
     this.height = height
     this.canvasPosition = canvasPosition
-    this.input = new InputHandler(this)
-    this.ui = new UserInterface(this)
     this.keys = []
     this.enemies = []
     this.drops = []
@@ -39,10 +37,12 @@ export default class Game {
     this.player = new Player(this)
     this.lvlScreen = new LevelScreen(this)
     this.waveController = new WaveController(this)
+    this.input = new InputHandler(this)
+    this.ui = new UserInterface(this)
   }
 
   levelUp() {
-    this.paused = true
+    this.paused = !this.paused
     this.keys = []
     this.lvlScreen.showScreen()
   }
@@ -114,7 +114,7 @@ export default class Game {
             this.player.xp += enemy.xp
             this.score += enemy.score
 
-            if (Math.random() > .8) {
+            if (Math.random() > .95) {
               this.drops.push(new Candy(this, enemy.x, enemy.y))
             }
           }
@@ -143,6 +143,9 @@ export default class Game {
   }
 
   draw(context) {
+    context.shadowOffsetX = 2
+    context.shadowOffsetY = 2
+    context.shadowColor = 'black'
     this.background.draw(context)
     this.player.draw(context)
     this.enemies.forEach((enemy) => {
@@ -153,6 +156,7 @@ export default class Game {
     })
     // this.lvlScreen.draw(context)
     this.ui.draw(context)
+    this.lvlScreen.draw(context)
   }
 
   checkCollision(object1, object2) {

@@ -17,7 +17,7 @@ export default class Exsanguinate extends Projectile {
         this.image = image
 
         this.speed = 400
-        this.damage = 1
+        this.damage = 4
         this.markedForDeletion = false
     }
 

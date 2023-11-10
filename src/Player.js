@@ -64,8 +64,8 @@ export default class Player {
     this.neededXp = 100
     this.level = 1
 
-    this.lives = 3
-    this.maxLives = 3
+    this.lives = 5
+    this.maxLives = 5
 
     this.stamina = 100
     this.maxStamina = 100
@@ -85,6 +85,8 @@ export default class Player {
     this.isInvulnerable = false
     this.isIdle = false
     this.cooldown = true
+
+    this.levelPoints = 0
   }
 
   dodge() {
@@ -147,8 +149,8 @@ export default class Player {
     if (this.xp >= this.neededXp) {
       this.xp = this.xp - this.neededXp
       this.level++
+      this.levelPoints++
       this.neededXp = Math.ceil(this.neededXp * 1.4)
-      this.game.levelUp()
     }
 
     if (this.lives <= 0) {

@@ -22,6 +22,14 @@ export default class UserInterface {
     context.fillRect(this.game.player.x - 8, this.game.player.y - 8, (this.game.player.stamina / this.game.player.maxStamina) * 50, 4)
 
     context.fillStyle = 'white'
+    context.textAlign = 'left'
+    context.fillText(`WEAPON: ${(this.game.input.weaponType).toUpperCase()}`, 20, 40)
+
+    context.fillStyle = 'white'
+    context.textAlign = 'left'
+    context.fillText(`LEVEL POINTS: ${(this.game.player.levelPoints)}`, 20, this.game.height - 20)
+
+    context.fillStyle = 'white'
     context.textAlign = 'center'
     context.fillText(`SCORE: ${(this.game.score)}`, this.game.width / 2, 30)
     context.fillText(`Time: ${(this.game.gameTime * 0.001).toFixed(1)}`, this.game.width / 2, 60)

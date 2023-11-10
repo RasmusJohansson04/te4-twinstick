@@ -47,9 +47,17 @@ export default class InputHandler {
           this.weaponType = 'exsanguinate'
         }
 
+        if (event.key === '5') {
+          this.weaponType = 'exsanguinate'
+        }
+
         if (event.key === 'p') {
           this.game.debug = !this.game.debug
         }
+      }
+
+      if (event.key === 'e') {
+        this.game.levelUp()
       }
 
       if (event.key === 'Escape') {
@@ -72,10 +80,8 @@ export default class InputHandler {
     })
 
     window.addEventListener('mousemove', (event) => {
-      if (!this.game.paused) {
-        this.mouseX = event.clientX - this.game.canvasPosition.left
-        this.mouseY = event.clientY - this.game.canvasPosition.top
-      }
+      this.mouseX = event.clientX - this.game.canvasPosition.left
+      this.mouseY = event.clientY - this.game.canvasPosition.top
     })
 
     window.addEventListener('mousedown', (event) => {
@@ -96,6 +102,36 @@ export default class InputHandler {
           case 'exsanguinate':
             this.game.player.exsanguinate(this.mouseX, this.mouseY)
             break;
+        }
+      }
+      const mouse = {
+        x: this.mouseX,
+        y: this.mouseY,
+        width: 1,
+        height: 1
+      }
+      const lvl = this.game.lvlScreen
+      if (lvl.show) {
+        for (let index = 0; index < lvl.upgrades.length; index++) {
+          console.log(mouse)
+          console.log(lvl.upgradesObjects[index])
+          const player = this.game.player
+          if (this.game.checkCollision(mouse, lvl.upgradesObjects[index]) && player.levelPoints > 0) {
+            player.levelPoints -= 1
+            switch (lvl.upgradesObjects[index].skill) {
+              case 'health':
+                player.lives += 1
+                player.maxLives += 1
+                break
+              case 'stamina':
+                player.stamina += 10
+                player.maxStamina += 10
+                break
+              case 'recovery':
+                player.staminaInterval -= 10
+                break
+            }
+          }
         }
       }
     })

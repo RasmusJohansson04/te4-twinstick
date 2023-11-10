@@ -59,7 +59,7 @@ export default class EnemyList {
             },
             {
                 'id': 2,
-                'weight': 10,
+                'weight': 7,
             },
         ]
         this.boss = [
