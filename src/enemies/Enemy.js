@@ -33,12 +33,12 @@ export default class Enemy {
       if (this.hurtTimer < this.hurtInterval) {
         this.hurtTimer += deltaTime
         if (this.image) {
-          this.image.src = this.hurtSprite
+          this.setSprite('hurt')
         }
       }
       else {
         if (this.image) {
-          this.image.src = this.normalSprite
+          this.setSprite('idle')
         }
         this.isHurt = false
         this.hurtTimer = 0
@@ -51,6 +51,16 @@ export default class Enemy {
       case 'walk':
         this.image.src = this.walkAnimation.spriteSheet
         this.maxFrame = this.walkAnimation.maxFrame
+        this.interval = 1000 / this.fps
+        break
+      case 'idle':
+        this.image.src = this.idleAnimation.spriteSheet
+        this.maxFrame = this.idleAnimation.maxFrame
+        this.interval = 1000 / this.fps
+        break
+      case 'hurt':
+        this.image.src = this.hurtAnimation.spriteSheet
+        this.maxFrame = this.hurtAnimation.maxFrame
         this.interval = 1000 / this.fps
         break
     }
@@ -87,6 +97,7 @@ export default class Enemy {
     }
 
     if (this.image) {
+      // console.log((this.image))
       context.drawImage(
         this.image,
         this.frameX * this.width,

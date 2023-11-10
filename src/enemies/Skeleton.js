@@ -27,6 +27,16 @@ export default class Skeleton extends Enemy {
       maxFrame: 4
     }
 
+    this.idleAnimation = {
+      spriteSheet: skeletonWalk,
+      maxFrame: 2
+    }
+
+    this.hurtAnimation = {
+      spriteSheet: skeletonWalk,
+      maxFrame: 1
+    }
+
     this.score = 25
     this.xp = 20
 

@@ -268,14 +268,6 @@ export default class Player {
       projectile.draw(context)
     })
 
-    // if (this.flip) {
-    //   context.save()
-    //   context.scale(-1, 1)
-    //   context.drawImage(this.image, this.x - this.xOffset, this.y, this.width * -1, this.height)
-    // }
-    // context.restore()
-    //context.drawImage(this.image, this.x - this.width / 2, this.y)
-
     if (this.flip) {
       context.save()
       context.scale(-1, 1)

@@ -20,8 +20,20 @@ export default class Ghost extends Enemy {
     this.score = 10
     this.xp = 10
 
-    this.normalSprite = spriteImage
-    this.hurtSprite = spriteImage2
+    this.walkAnimation = {
+      spriteSheet: spriteImage,
+      maxFrame: 4
+    }
+
+    this.idleAnimation = {
+      spriteSheet: spriteImage,
+      maxFrame: 2
+    }
+
+    this.hurtAnimation = {
+      spriteSheet: spriteImage2,
+      maxFrame: 1
+    }
 
     const image = new Image()
     image.src = spriteImage
