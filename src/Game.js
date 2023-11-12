@@ -1,14 +1,12 @@
 import InputHandler from './utilities/InputHandler.js'
 import Player from './Player.js'
 import UserInterface from './utilities/UserInterface.js'
-import Ghost from './enemies/Ghost.js'
-import Skeleton from './enemies/Skeleton.js'
-import Gargoyle from './enemies/Gargoyle.js'
-import Reaper from './enemies/Reaper.js'
 import Candy from './Candy.js'
 import Background from './utilities/Background.js'
 import LevelScreen from './utilities/LevelScreen.js'
 import WaveController from './utilities/WaveController.js'
+import Sound from './Sound.js'
+
 export default class Game {
   constructor(width, height, canvasPosition) {
     this.width = width
@@ -33,6 +31,7 @@ export default class Game {
     this.score = 0
     this.tileSize = 16
 
+    this.sound = new Sound(this)
     this.background = new Background(this)
     this.player = new Player(this)
     this.lvlScreen = new LevelScreen(this)
@@ -54,9 +53,6 @@ export default class Game {
     else {
       return
     }
-
-    //* SPAWN ENEMIES
-
 
     if (this.enemyTimer > this.enemyInterval) {
       let items = ['north', 'west', 'south', 'east']
@@ -89,6 +85,7 @@ export default class Game {
     this.drops.forEach((drop) => {
       if (this.checkCollision(this.player, drop)) {
         drop.markedForDeletion = true
+        this.sound.playSound('pickup')
         if (this.player.lives < this.player.maxLives) {
           this.player.lives++
         }
@@ -101,6 +98,7 @@ export default class Game {
       if (this.checkCollision(this.player, enemy)) {
         if (!this.player.isInvulnerable && enemy.lives > 0) {
           this.player.hurt()
+          this.sound.playSound('hit')
           this.player.isHurt = true
         }
 
@@ -109,6 +107,7 @@ export default class Game {
         if (this.checkCollision(projectile, enemy) && enemy.type !== 'candy' && projectile.hasHit.indexOf(enemy) === -1 && !enemy.markedForDeletion) {
           enemy.isHurt = true
           enemy.lives -= projectile.damage
+          this.sound.playSound('hit')
           if (enemy.lives <= 0) {
             enemy.markedForDeletion = true
             this.player.xp += enemy.xp
@@ -131,6 +130,7 @@ export default class Game {
           if (this.checkCollision(projectile, this.player)) {
             projectile.markedForDeletion = true
             if (!this.player.isInvulnerable) {
+              this.sound.playSound('hit')
               this.player.hurt()
               this.player.isHurt = true
             }

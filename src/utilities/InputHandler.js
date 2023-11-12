@@ -1,8 +1,11 @@
+import Sound from "../Sound"
+
 export default class InputHandler {
   constructor(game) {
     this.game = game
     this.mouseX = 0
     this.mouseY = 0
+    this.sound = new Sound(game)
     this.weaponType = 'arrow'
     this.play = document.querySelector('#play')
     this.tutorial = document.querySelector('#tutorial')
@@ -86,6 +89,7 @@ export default class InputHandler {
 
     window.addEventListener('mousedown', (event) => {
       if (!this.game.paused && this.game.player.stamina > 0) {
+        this.game.sound.playSound('shoot')
         switch (this.weaponType) {
           case 'arrow':
             this.game.player.arrow(this.mouseX, this.mouseY)
@@ -130,6 +134,13 @@ export default class InputHandler {
               case 'recovery':
                 player.staminaInterval -= 10
                 break
+              case 'strength':
+                player.baseDmg += .5
+                break
+            }
+            this.sound.playSound('pickup')
+            if(player.levelPoints <= 0) {
+              this.game.levelUp()
             }
           }
         }

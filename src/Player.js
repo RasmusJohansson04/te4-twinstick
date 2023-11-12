@@ -9,6 +9,8 @@ import Spear from './weapons/Spear.js'
 import Sword from './weapons/Sword.js'
 import Exsanguinate from './weapons/Exsanguinate.js'
 
+import Sound from './Sound'
+
 
 export default class Player {
   constructor(game) {
@@ -19,6 +21,7 @@ export default class Player {
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
 
+    this.sound = new Sound(game)
     this.projectiles = []
 
     this.speedX = 0
@@ -87,6 +90,7 @@ export default class Player {
     this.cooldown = true
 
     this.levelPoints = 0
+    this.baseDmg = 1
   }
 
   dodge() {
@@ -129,6 +133,7 @@ export default class Player {
   minusStamina(amount) {
     this.stamina = Math.max(0, Math.min(this.stamina - amount, this.maxStamina));
     this.cooldown = false
+    this.staminaTimer = 0
   }
 
   update(deltaTime) {
@@ -148,6 +153,7 @@ export default class Player {
 
     if (this.xp >= this.neededXp) {
       this.xp = this.xp - this.neededXp
+      this.sound.playSound('pickup')
       this.level++
       this.levelPoints++
       this.neededXp = Math.ceil(this.neededXp * 1.4)
@@ -393,7 +399,6 @@ export default class Player {
       mouseX - (this.x + this.width / 2)
     )
     this.hurt()
-
 
     this.projectiles.push(
       new Exsanguinate(

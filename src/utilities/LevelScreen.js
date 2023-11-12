@@ -7,6 +7,8 @@ export default class LevelScreen {
     this.options = document.querySelectorAll('.option')
     this.table = new WeaponTable(game)
     this.upgrades = ['health', 'stamina', 'recovery', 'strength']
+    this.descriptions = ['Increases HEALTH by ', 'Increases STAMINA by ', 'Increases STAMINA RECOVERY by ', 'Increases BASE DAMAGE by ']
+    this.increaseAmount = [1, 10, -10, .2]
     this.upgradesObjects = []
     this.fontSize = 25
     this.fontFamily = 'Arial'
@@ -46,6 +48,8 @@ export default class LevelScreen {
         context.fillStyle = 'white'
         context.textAlign = 'left'
         context.fillText(this.upgrades[index].toUpperCase(), 60, 55 * index + (this.game.height / 3) + 33)
+        context.textAlign = 'right'
+        context.fillText(this.descriptions[index].toUpperCase() + this.increaseAmount[index], this.game.width - 40 * 2 - 20, 55 * index + (this.game.height / 3) + 33)
       }
     }
   }

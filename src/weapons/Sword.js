@@ -18,7 +18,7 @@ export default class Sword extends Projectile {
         this.image = image
 
         this.distance = 48
-        this.damage = 3
+        this.damage = 3 + game.player.baseDmg
         this.color = 'white'
 
         this.attackTimer = 0

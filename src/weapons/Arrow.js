@@ -16,7 +16,7 @@ export default class Arrow extends Projectile {
         this.image = image
 
         this.speed = 400
-        this.damage = 1
+        this.damage = 1 + game.player.baseDmg
         this.markedForDeletion = false
     }
 
