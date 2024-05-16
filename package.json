@@ -12,6 +12,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "modern-css-reset": "^1.4.0"
+    "modern-css-reset": "^1.4.0",
+    "noisejs": "^2.1.0"
   }
 }
